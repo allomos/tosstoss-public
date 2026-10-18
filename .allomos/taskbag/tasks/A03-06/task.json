@@ -1,6 +1,7 @@
 {
   "area": "A03",
+  "holder": "room-tab",
   "id": "A03-06",
-  "state": "ready",
+  "state": "in_progress",
   "title": "选“下线”后页面只显示“已下线”的提示，下面的卡片都隐藏"
 }
