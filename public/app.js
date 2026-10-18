@@ -198,11 +198,12 @@
     // Offline: only the top bar, this card and a short note; the cards below are hidden, not removed.
     document.body.classList.toggle('is-offline', mode === 'offline');
     for (const r of document.querySelectorAll('input[name="mode"]')) r.checked = r.value === mode;
-    el.modeHint.textContent = t(
-      mode === 'offline' ? 'mode.offlineHint'
-        : !state.net ? 'mode.lanHint'
-          : mode === 'room' ? 'mode.roomHint'
-            : mode === 'plaza' ? 'mode.plazaHint' : 'net.visibleHint', { max: fmtMax() });
+    // Offline: the note below this card says it all, so the hint line stays empty.
+    el.modeHint.hidden = mode === 'offline';
+    el.modeHint.textContent = mode === 'offline' ? '' : t(
+      !state.net ? 'mode.lanHint'
+        : mode === 'room' ? 'mode.roomHint'
+          : mode === 'plaza' ? 'mode.plazaHint' : 'net.visibleHint', { max: fmtMax() });
   }
 
   // Go to a place (and room); reconnects to that group when it changed or the page was offline.

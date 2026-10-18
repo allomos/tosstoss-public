@@ -275,9 +275,17 @@ main {
 /* Offline: every card below 我的设备 is hidden (kept in the page) and a short note shows instead. */
 .offline-note { display: none; }
 .is-offline .offline-note {
-  display: block; width: fit-content; margin: 4px auto 0; padding: 8px 18px; border-radius: 999px;
-  background: var(--surface); border: 1px solid var(--line); color: var(--muted); font-size: 15px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 28px 20px 24px;
+  border-radius: var(--radius); background: var(--surface); border: 1px dashed var(--line); text-align: center;
 }
+.offline-icon {
+  display: grid; place-items: center; width: 52px; height: 52px; margin-bottom: 6px; border-radius: 50%;
+  background: var(--bg); border: 1px solid var(--line); color: var(--muted);
+}
+.offline-icon svg { width: 26px; height: 26px; }
+.offline-note strong { font-size: 18px; }
+.offline-note p { margin: 0; max-width: 26em; text-wrap: balance; color: var(--muted); font-size: 14px; line-height: 1.55; }
+.offline-note .offline-back { margin-top: 4px; font-size: 13px; color: var(--accent-strong); }
 .is-offline .me ~ :not(.offline-note) { display: none; }
 
 /* Room QR code */
