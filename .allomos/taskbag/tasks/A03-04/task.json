@@ -1,0 +1,10 @@
+{
+  "area": "A03",
+  "holder": "claude-cloudflare",
+  "id": "A03-04",
+  "label": "locally verified",
+  "state": "waiting",
+  "title": "房间可以显示二维码，手机扫码即打开房间链接加入",
+  "waiting_on": "用真实手机扫房间二维码，确认能打开链接并进入同一房间",
+  "who": "使用者"
+}

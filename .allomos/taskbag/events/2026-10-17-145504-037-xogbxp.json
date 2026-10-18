@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-17T14:55:04Z",
+  "via": "alm",
+  "command": "add task",
+  "kind": "task",
+  "id": "A02-01",
+  "changes": [
+    {
+      "field": "title",
+      "to": "启动服务器后打开网页的设备自动出现在彼此的在线列表中"
+    },
+    {
+      "field": "area",
+      "to": "A02"
+    },
+    {
+      "field": "state",
+      "to": "backlog"
+    },
+    {
+      "field": "description",
+      "to": "**Outcome.** `npm start` 启动 Node 服务器，提供网页并通过 WebSocket 维护在线设备列表；设备加入、离开时所有人的列表即时更新。\n\n**Done means.** 自动化测试：两个 WebSocket 客户端连上后互相收到对方；一个断开后另一个收到离开消息。终端打印局域网网址。\n\n**Notes.** 浏览器无法直接做局域网广播发现，所以由局域网内的一台机器运行服务器作为“会合点”。\n"
+    },
+    {
+      "field": "base_branch",
+      "to": "main"
+    }
+  ]
+}

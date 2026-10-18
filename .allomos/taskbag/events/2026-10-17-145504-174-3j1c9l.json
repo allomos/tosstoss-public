@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-17T14:55:04Z",
+  "via": "alm",
+  "command": "add task",
+  "kind": "task",
+  "id": "A01-02",
+  "changes": [
+    {
+      "field": "title",
+      "to": "v0.1 验收检查：两台设备从头到尾互传文件"
+    },
+    {
+      "field": "area",
+      "to": "A01"
+    },
+    {
+      "field": "state",
+      "to": "backlog"
+    },
+    {
+      "field": "description",
+      "to": "**Outcome.** 对照规格验收标准 1–5 试用 v0.1，写下让这个人试用的步骤。\n\n**Done means.** 端到端测试通过；试用步骤写入完成步骤。\n"
+    },
+    {
+      "field": "base_branch",
+      "to": "main"
+    }
+  ]
+}

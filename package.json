@@ -1,0 +1,27 @@
+{
+  "name": "tosstoss",
+  "version": "0.2.0",
+  "description": "投桃 Tosstoss — 局域网内互传文件的 Web 应用",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js",
+    "dev:cf": "wrangler dev --env=\"\"",
+    "deploy": "wrangler deploy --env=\"\"",
+    "test:cf": "TOSSTOSS_URL=http://127.0.0.1:8787 node --test test/*.test.js",
+    "deploy:unlimited": "node scripts/unlimited.js deploy",
+    "dev:cf:unlimited": "node scripts/unlimited.js dev"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.22.0"
+  },
+  "devDependencies": {
+    "qrcode-generator": "^2.0.4",
+    "wrangler": "^4.151.1"
+  }
+}

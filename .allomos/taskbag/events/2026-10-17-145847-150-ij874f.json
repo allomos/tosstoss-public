@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-17T14:58:47Z",
+  "by": "claude/tosstoss-goal",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A03-01",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "界面：单页、桃色主题、支持深色模式；整页都可拖放文件，也支持粘贴文件；下线=断开 WebSocket，上线=重新连接（重新连接后需重新勾选）"
+    }
+  ]
+}

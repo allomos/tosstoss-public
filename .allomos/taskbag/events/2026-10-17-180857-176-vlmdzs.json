@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-17T18:08:57Z",
+  "by": "claude-cloudflare",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A04-03",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "20 MB 上限暂不变：选文件时就按上限过滤，直连的文件也受限（是否让直连不受上限，待使用者决定）"
+    }
+  ]
+}

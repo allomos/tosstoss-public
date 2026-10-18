@@ -1,0 +1,11 @@
+{
+  "area": "A02",
+  "holder": "claude/tosstoss-goal",
+  "human_check_steps": "1. 在项目文件夹运行 `npm install`，然后 `npm start`。\n2. 终端会打印 `http://192.168.x.x:8080` 这样的网址。\n3. 运行 `npm test`：presence 测试应全部通过（两台设备互相发现、改名、离开都即时通知）。\n",
+  "id": "A02-01",
+  "iteration": "I01",
+  "label": "locally verified",
+  "state": "done",
+  "title": "启动服务器后打开网页的设备自动出现在彼此的在线列表中",
+  "without_human_check": "Goal run, quiet mode"
+}

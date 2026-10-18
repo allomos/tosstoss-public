@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-17T18:25:02Z",
+  "by": "claude-cloudflare",
+  "via": "alm",
+  "command": "note",
+  "kind": "task",
+  "id": "A04-03",
+  "changes": [
+    {
+      "field": "handoff_note",
+      "to": "使用者 2026-10-18 决定：直连不受 20 MB 上限，只限经服务器中转的文件（已实现：大小检查移到发送时）"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-17T15:14:27Z",
+  "by": "claude/tosstoss-goal",
+  "via": "alm",
+  "command": "wait",
+  "kind": "task",
+  "id": "A01-01",
+  "changes": [
+    {
+      "field": "state",
+      "from": "ready",
+      "to": "waiting"
+    },
+    {
+      "field": "waiting_on",
+      "to": "Try the app: 在一台电脑的项目文件夹运行 npm install && npm start，用手机和另一台电脑（同一 Wi-Fi）打开终端打印的网址，按 A01-03 的完成步骤试勾选、发送、自动接收、下线和改名；特别请在真实手机上试一次"
+    }
+  ]
+}

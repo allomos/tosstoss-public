@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-17T17:24:33Z",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A02-03",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "页面每 25 秒发 ping，Durable Object 自动回 pong 不唤醒，免费套餐下空闲不计时长"
+    }
+  ]
+}

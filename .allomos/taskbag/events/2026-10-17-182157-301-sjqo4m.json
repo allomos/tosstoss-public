@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-17T18:21:57Z",
+  "by": "claude-cloudflare",
+  "via": "alm",
+  "command": "wait",
+  "kind": "task",
+  "id": "A02-04",
+  "changes": [
+    {
+      "field": "waiting_on",
+      "from": "在真实手机和电脑上试公网版 https://tosstoss.whui1978.workers.dev：同一 Wi-Fi 打开“在网络上显示我”后互相看到并传文件；手机用流量时用房间码互传；切换四种语言",
+      "to": "在真实手机和电脑上试公网版 https://tosstoss.mypals.workers.dev：同一 Wi-Fi 打开“在网络上显示我”后互相看到并传文件；手机用流量时用房间码互传；切换四种语言"
+    }
+  ]
+}

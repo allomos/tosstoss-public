@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-17T14:51:32Z",
+  "via": "app",
+  "command": "init",
+  "kind": "project",
+  "id": "tosstoss",
+  "changes": [
+    {
+      "field": "format",
+      "to": "allomos/4"
+    },
+    {
+      "field": "labels",
+      "to": [
+        "implemented",
+        "locally verified",
+        "deployed and verified",
+        "human verified"
+      ]
+    },
+    {
+      "field": "name",
+      "to": "tosstoss"
+    },
+    {
+      "field": "task_language",
+      "to": "ui"
+    }
+  ]
+}

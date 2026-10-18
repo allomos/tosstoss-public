@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-17T14:55:04Z",
+  "via": "alm",
+  "command": "add task",
+  "kind": "task",
+  "id": "A03-02",
+  "changes": [
+    {
+      "field": "title",
+      "to": "手机浏览器上能舒适地完成勾选、选择文件、发送和接收"
+    },
+    {
+      "field": "area",
+      "to": "A03"
+    },
+    {
+      "field": "state",
+      "to": "backlog"
+    },
+    {
+      "field": "description",
+      "to": "**Outcome.** 响应式布局：窄屏单列、触控目标足够大、点击文件框调起手机文件选择器；接收时手机上可点击保存。\n\n**Done means.** 375px 宽度下截图检查布局无横向滚动；文件选择与保存流程在移动模拟下可用。\n"
+    },
+    {
+      "field": "base_branch",
+      "to": "main"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-17T14:55:04Z",
+  "via": "alm",
+  "command": "block",
+  "kind": "task",
+  "id": "A03-01",
+  "changes": [
+    {
+      "field": "state",
+      "from": "ready",
+      "to": "blocked"
+    },
+    {
+      "field": "blocked_by",
+      "to": [
+        "A02-01"
+      ]
+    }
+  ]
+}

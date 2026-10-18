@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-17T18:01:51Z",
+  "by": "claude-cloudflare",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A02-05",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "上限按单个文件计（20 MB = 20971520 字节），超限文件选择时直接不加入并提示；服务器按实际转发字节数也拦截，谎报大小会被取消"
+    }
+  ]
+}

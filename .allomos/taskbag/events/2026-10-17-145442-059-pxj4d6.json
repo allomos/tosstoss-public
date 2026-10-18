@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-17T14:54:42Z",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A01-01",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "运行模式：安静模式（这个人在 Allomos 启动目标时选择，2026-10-17）"
+    }
+  ]
+}

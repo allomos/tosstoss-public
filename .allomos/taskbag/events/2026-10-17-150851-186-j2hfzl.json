@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-17T15:08:51Z",
+  "by": "claude/tosstoss-goal",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A04-02",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "接收端每 32MB 把收到的分块合并成 Blob，减少大文件时的内存碎片；文件仍在浏览器内存/临时存储中，超大文件（数 GB）在手机上可能受限"
+    }
+  ]
+}

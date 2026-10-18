@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-17T18:05:27Z",
+  "via": "alm",
+  "command": "ready",
+  "kind": "task",
+  "id": "A04-03",
+  "changes": [
+    {
+      "field": "state",
+      "from": "backlog",
+      "to": "ready"
+    }
+  ]
+}

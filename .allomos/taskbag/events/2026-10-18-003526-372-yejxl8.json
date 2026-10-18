@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-18T00:35:26Z",
+  "by": "claude-direct-hint",
+  "via": "alm",
+  "command": "wait",
+  "kind": "task",
+  "id": "A04-04",
+  "changes": [
+    {
+      "field": "state",
+      "from": "in_progress",
+      "to": "waiting"
+    },
+    {
+      "field": "waiting_on",
+      "to": "在真实手机和电脑上试：勾选设备后看到绿色“直连”或蓝色“经服务器”；鼠标停在标签上出现刷新图标（手机上“经服务器”后一直有）；发超过 20 MB 的文件给一台直连和一台经服务器的设备，传输记录写明哪台没收到、为什么"
+    },
+    {
+      "field": "who",
+      "to": "使用者"
+    }
+  ]
+}

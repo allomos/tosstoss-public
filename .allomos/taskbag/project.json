@@ -1,0 +1,13 @@
+{
+  "format": "allomos/4",
+  "id": "tosstoss",
+  "name": "tosstoss",
+  "labels": [
+    "implemented",
+    "locally verified",
+    "deployed and verified",
+    "human verified"
+  ],
+  "project_folder": ".",
+  "task_language": "ui"
+}

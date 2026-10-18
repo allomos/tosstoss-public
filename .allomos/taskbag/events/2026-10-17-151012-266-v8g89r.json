@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-17T15:10:12Z",
+  "by": "claude/tosstoss-goal",
+  "via": "alm",
+  "command": "done",
+  "kind": "task",
+  "id": "A02-02",
+  "changes": [
+    {
+      "field": "state",
+      "from": "in_progress",
+      "to": "done"
+    },
+    {
+      "field": "without_human_check",
+      "to": "Goal run, quiet mode"
+    },
+    {
+      "field": "human_check_steps",
+      "to": "1. 两台设备打开页面：各自显示一个“形容词+水果”的名字（如“活泼的荔枝”）和电脑/手机图标；对方列表里看到同样的名字和图标。\n2. 点自己名字旁的 ✎，输入新名字确定：对方列表里立即变成新名字。\n3. 刷新页面：名字保持不变。\n已验证（2026-10-18）：两个浏览器标签页改名即时同步，刷新后保留。\n"
+    }
+  ]
+}

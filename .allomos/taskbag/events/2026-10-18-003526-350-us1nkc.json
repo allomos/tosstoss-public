@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-18T00:35:26Z",
+  "by": "claude-direct-hint",
+  "via": "alm",
+  "command": "label",
+  "kind": "task",
+  "id": "A04-04",
+  "changes": [
+    {
+      "field": "label",
+      "to": "locally verified"
+    }
+  ]
+}

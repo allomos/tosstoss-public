@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-17T17:24:33Z",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A02-03",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "IPv6 按 /64 前缀分组（同一网络的设备各有不同 IPv6 地址）；分组名用 IP 的 SHA-256，不存原始地址"
+    }
+  ]
+}

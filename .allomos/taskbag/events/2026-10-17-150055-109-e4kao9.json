@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-17T15:00:55Z",
+  "by": "claude/tosstoss-goal",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A04-01",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "传输经服务器中转（WebSocket 分块 256KB，每块前缀 36 字符传输 ID），不用 WebRTC：局域网内足够快，且手机浏览器上更可靠"
+    }
+  ]
+}

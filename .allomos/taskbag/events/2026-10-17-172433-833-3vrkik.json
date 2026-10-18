@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-17T17:24:33Z",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A02-03",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "进入房间后离开同网络分组（一台设备同时只在一个组里）；房间码 6 位，不含易混字符 0/O/1/I/L"
+    }
+  ]
+}

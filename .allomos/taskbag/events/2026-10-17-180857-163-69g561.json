@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-17T18:08:57Z",
+  "by": "claude-cloudflare",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A04-03",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "直连收发和中转共用一套消息和确认（ack），同一文件可以部分直连、部分中转；直连每条消息最大 64 KB，所以每 256 KB 的块拆成几段发"
+    }
+  ]
+}

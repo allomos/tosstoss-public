@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-17T14:54:42Z",
+  "via": "alm",
+  "command": "add task",
+  "kind": "task",
+  "id": "A01-01",
+  "changes": [
+    {
+      "field": "title",
+      "to": "Goal: 投桃 Tosstoss——局域网内打开网页即可互相发现、勾选对方、发送文件并自动接收的 Web 应用"
+    },
+    {
+      "field": "area",
+      "to": "A01"
+    },
+    {
+      "field": "state",
+      "to": "backlog"
+    },
+    {
+      "field": "base_branch",
+      "to": "main"
+    }
+  ]
+}

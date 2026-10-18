@@ -1,0 +1,10 @@
+{
+  "area": "A02",
+  "holder": "claude-cloudflare",
+  "id": "A02-05",
+  "label": "locally verified",
+  "state": "waiting",
+  "title": "公网发布两个版本：默认网址每个文件最大 20 MB，另一个专用网址不限大小",
+  "waiting_on": "在两个网址上各试一次：公开版选超过 20 MB 的文件会被拒绝；不限版能传大文件",
+  "who": "使用者"
+}

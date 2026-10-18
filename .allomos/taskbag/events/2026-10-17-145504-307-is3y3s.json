@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-17T14:55:04Z",
+  "via": "alm",
+  "command": "add task",
+  "kind": "task",
+  "id": "A01-03",
+  "changes": [
+    {
+      "field": "title",
+      "to": "v0.2 验收检查：手机与电脑之间互传、进度、改名全部可用"
+    },
+    {
+      "field": "area",
+      "to": "A01"
+    },
+    {
+      "field": "state",
+      "to": "backlog"
+    },
+    {
+      "field": "description",
+      "to": "**Outcome.** 对照规格验收标准 1–7 试用 v0.2，写下让这个人试用的步骤。\n\n**Done means.** 全部自动化测试通过；手机宽度检查通过；试用步骤写入完成步骤。\n"
+    },
+    {
+      "field": "base_branch",
+      "to": "main"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-17T14:55:04Z",
+  "via": "alm",
+  "command": "plan",
+  "kind": "task",
+  "id": "A04-02",
+  "changes": [
+    {
+      "field": "iteration",
+      "to": "I02"
+    }
+  ]
+}

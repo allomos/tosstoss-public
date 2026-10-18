@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-17T18:24:57Z",
+  "by": "claude-cloudflare",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A04-03",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "大小检查移到发送时：选文件不限；发送时没能直连的接收方，文件超过上限就不发给它们并提示；全部都没能直连则该文件失败，显示原因"
+    }
+  ]
+}

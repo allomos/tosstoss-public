@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-17T14:55:04Z",
+  "via": "alm",
+  "command": "add task",
+  "kind": "task",
+  "id": "A03-01",
+  "changes": [
+    {
+      "field": "title",
+      "to": "用户在页面上看到在线设备，勾选对方，选择或拖放文件，并能点击发送和下线"
+    },
+    {
+      "field": "area",
+      "to": "A03"
+    },
+    {
+      "field": "state",
+      "to": "backlog"
+    },
+    {
+      "field": "description",
+      "to": "**Outcome.** 单页界面：在线设备列表（复选框）、文件框（点击选择或拖放）、“发送”按钮、“下线/上线”按钮，标题“投桃 Tosstoss”。\n\n**Done means.** 在浏览器中打开，两个标签页互相出现在列表中；勾选、选文件、拖放、下线/上线可操作。\n"
+    },
+    {
+      "field": "base_branch",
+      "to": "main"
+    }
+  ]
+}

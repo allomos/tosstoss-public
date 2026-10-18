@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-17T14:54:42Z",
+  "via": "alm",
+  "command": "add iteration",
+  "kind": "iteration",
+  "id": "I02",
+  "changes": [
+    {
+      "field": "name",
+      "to": "v0.2 手机可用与体验完善"
+    },
+    {
+      "field": "order",
+      "to": 2
+    },
+    {
+      "field": "release",
+      "to": "v0.2"
+    }
+  ]
+}

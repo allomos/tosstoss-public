@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-17T15:10:12Z",
+  "by": "claude/tosstoss-goal",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A02-02",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "默认名字“形容词+水果”（如“活泼的荔枝”，16×16 种组合），存在本机浏览器 localStorage；点名字旁的 ✎ 用浏览器自带输入框改名，最长 32 字"
+    }
+  ]
+}

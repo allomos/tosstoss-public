@@ -1,0 +1,11 @@
+{
+  "area": "A03",
+  "holder": "claude/tosstoss-goal",
+  "human_check_steps": "1. `npm start`，在两台设备（或同一电脑的 `http://localhost:8080` 和 `http://127.0.0.1:8080` 两个标签页）打开页面。\n2. 每个页面的“在线设备”里出现对方；点击对方即可勾选（出现 ✓）。\n3. 点击文件框选择文件，或把文件拖到页面任意位置，文件出现在列表中，可点 ✕ 移除。\n4. 在一个页面点“下线”：另一个页面的列表里它消失；再点“上线”，它重新出现。\n",
+  "id": "A03-01",
+  "iteration": "I01",
+  "label": "locally verified",
+  "state": "done",
+  "title": "用户在页面上看到在线设备，勾选对方，选择或拖放文件，并能点击发送和下线",
+  "without_human_check": "Goal run, quiet mode"
+}

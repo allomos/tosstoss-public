@@ -1,0 +1,11 @@
+{
+  "area": "A04",
+  "holder": "claude/tosstoss-goal",
+  "human_check_steps": "1. `npm start`，在两台设备上打开页面（或 `http://localhost:8080` 与 `http://127.0.0.1:8080` 两个标签页）。\n2. 在 A 上勾选 B，选择一个或几个文件，点“发送给 1 台设备”。\n3. B 不做任何操作：浏览器自动下载文件，“传输记录”中出现“已接收”和“保存”按钮；打开文件，内容与原文件一致。\n4. 运行 `npm test`：transfer 测试验证两台接收端收到的文件 SHA-256 与原文件一致，未勾选的设备收不到。\n",
+  "id": "A04-01",
+  "iteration": "I01",
+  "label": "locally verified",
+  "state": "done",
+  "title": "勾选的接收方不做任何操作就自动收到发送的文件，内容与原文件一致",
+  "without_human_check": "Goal run, quiet mode"
+}

@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-17T14:55:04Z",
+  "via": "alm",
+  "command": "add task",
+  "kind": "task",
+  "id": "A04-01",
+  "changes": [
+    {
+      "field": "title",
+      "to": "勾选的接收方不做任何操作就自动收到发送的文件，内容与原文件一致"
+    },
+    {
+      "field": "area",
+      "to": "A04"
+    },
+    {
+      "field": "state",
+      "to": "backlog"
+    },
+    {
+      "field": "description",
+      "to": "**Outcome.** 文件分块经服务器中转发给每个勾选的接收方；接收方自动拼接成文件，自动保存并在“已收到”列表中可再次保存/打开。\n\n**Done means.** 自动化测试：发送端经 WebSocket 发送文件，两个接收端收到的字节与原文件 SHA-256 一致；浏览器中两个标签页互传成功。下线的设备收不到文件。\n"
+    },
+    {
+      "field": "base_branch",
+      "to": "main"
+    }
+  ]
+}

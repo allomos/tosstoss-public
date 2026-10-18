@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-17T15:00:55Z",
+  "by": "claude/tosstoss-goal",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A04-01",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "自动接收 = 收完即自动触发浏览器下载；部分手机浏览器会拦截非点击触发的下载，所以“传输记录”里保留“保存”按钮，图片显示缩略图"
+    }
+  ]
+}

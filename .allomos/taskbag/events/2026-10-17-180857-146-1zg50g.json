@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-17T18:08:57Z",
+  "by": "claude-cloudflare",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A04-03",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "只在发送时才建立直连（不是一看到设备就连），以免把 IP 暴露给只是在线的人；等 5 秒，失败后 60 秒内对该设备直接中转；STUN 用 stun.cloudflare.com，不用 TURN"
+    }
+  ]
+}

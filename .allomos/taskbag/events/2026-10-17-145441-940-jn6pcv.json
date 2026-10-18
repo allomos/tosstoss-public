@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-17T14:54:41Z",
+  "via": "alm",
+  "command": "add area",
+  "kind": "area",
+  "id": "A03",
+  "changes": [
+    {
+      "field": "name",
+      "to": "界面"
+    },
+    {
+      "field": "order",
+      "to": 3
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-17T14:54:41Z",
+  "via": "alm",
+  "command": "add iteration",
+  "kind": "iteration",
+  "id": "I01",
+  "changes": [
+    {
+      "field": "name",
+      "to": "v0.1 最小可用：发现、勾选、发送、自动接收"
+    },
+    {
+      "field": "order",
+      "to": 1
+    },
+    {
+      "field": "release",
+      "to": "v0.1"
+    }
+  ]
+}

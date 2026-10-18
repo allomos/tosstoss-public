@@ -1,0 +1,7 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "tosstoss", "runtimeExecutable": "npm", "runtimeArgs": ["start"], "port": 8080 },
+    { "name": "tosstoss-cf", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev:cf"], "port": 8787 }
+  ]
+}

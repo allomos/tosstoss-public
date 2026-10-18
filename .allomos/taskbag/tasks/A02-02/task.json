@@ -1,0 +1,11 @@
+{
+  "area": "A02",
+  "holder": "claude/tosstoss-goal",
+  "human_check_steps": "1. 两台设备打开页面：各自显示一个“形容词+水果”的名字（如“活泼的荔枝”）和电脑/手机图标；对方列表里看到同样的名字和图标。\n2. 点自己名字旁的 ✎，输入新名字确定：对方列表里立即变成新名字。\n3. 刷新页面：名字保持不变。\n已验证（2026-10-18）：两个浏览器标签页改名即时同步，刷新后保留。\n",
+  "id": "A02-02",
+  "iteration": "I02",
+  "label": "locally verified",
+  "state": "done",
+  "title": "每台设备有易认的名字和设备图标，可以改名，名字刷新后保留",
+  "without_human_check": "Goal run, quiet mode"
+}

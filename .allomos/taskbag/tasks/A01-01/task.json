@@ -1,0 +1,7 @@
+{
+  "area": "A01",
+  "id": "A01-01",
+  "state": "waiting",
+  "title": "Goal: 投桃 Tosstoss——局域网内打开网页即可互相发现、勾选对方、发送文件并自动接收的 Web 应用",
+  "waiting_on": "Try the app: 在一台电脑的项目文件夹运行 npm install && npm start，用手机和另一台电脑（同一 Wi-Fi）打开终端打印的网址，按 A01-03 的完成步骤试勾选、发送、自动接收、下线和改名；特别请在真实手机上试一次"
+}

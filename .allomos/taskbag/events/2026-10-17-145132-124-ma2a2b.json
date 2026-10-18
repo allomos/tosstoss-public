@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-17T14:51:32Z",
+  "via": "app",
+  "command": "connect project folder",
+  "kind": "project",
+  "id": "tosstoss",
+  "changes": [
+    {
+      "field": "project_folder",
+      "to": "."
+    }
+  ]
+}

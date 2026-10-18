@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-18T00:30:32Z",
+  "by": "claude-direct-hint",
+  "via": "alm",
+  "command": "claim",
+  "kind": "task",
+  "id": "A04-04",
+  "changes": [
+    {
+      "field": "state",
+      "from": "ready",
+      "to": "in_progress"
+    },
+    {
+      "field": "holder",
+      "to": "claude-direct-hint"
+    },
+    {
+      "field": "working_branch",
+      "to": "claude/a04-04"
+    }
+  ]
+}

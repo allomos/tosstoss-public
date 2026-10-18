@@ -1,0 +1,5 @@
+# Allomos writes these files with \n line endings; keep them so on every computer.
+*.json text eol=lf
+*.md text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf

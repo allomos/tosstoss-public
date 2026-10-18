@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-17T15:08:51Z",
+  "by": "claude/tosstoss-goal",
+  "via": "alm",
+  "command": "done",
+  "kind": "task",
+  "id": "A04-02",
+  "changes": [
+    {
+      "field": "state",
+      "from": "in_progress",
+      "to": "done"
+    },
+    {
+      "field": "without_human_check",
+      "to": "Goal run, quiet mode"
+    },
+    {
+      "field": "human_check_steps",
+      "to": "1. `npm start`，三台设备打开页面。A 勾选 B、C，选两个文件（其中一个几百 MB），点发送。\n2. A 的“传输记录”显示每个文件的进度条和“x MB / y MB · n%”，完成后显示“已送达”；第二个文件排队“等待发送”，第一个送达后开始。\n3. B、C 上同样显示接收进度，完成后自动下载。\n4. 发送大文件时让 C 点“下线”：A 弹出“… 已离开，未收到 …”，B 照常收完，A 显示“已送达（1 台未收到）”。\n5. `npm test`：large 测试验证 200MB 文件按流控发给两台接收端，SHA-256 一致；transfer 测试验证回执与失败通知。\n已验证（2026-10-18）：浏览器三标签页 40MB+60MB+1B 文件送达，进度与“已送达”正确；npm test 8/8。下线中途失败的界面路径只由服务器测试覆盖（本机传输太快，来不及在浏览器里中途下线）。\n"
+    }
+  ]
+}

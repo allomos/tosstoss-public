@@ -1,0 +1,11 @@
+{
+  "area": "A03",
+  "holder": "claude/tosstoss-goal",
+  "human_check_steps": "1. `npm start`，用手机浏览器（Safari 或 Chrome）打开终端打印的网址。\n2. 页面单列显示，无横向滚动；文件框显示“点这里选择文件或照片”，点击可从相册或文件中选择。\n3. 勾选电脑，选文件，点发送：电脑自动收到。\n4. 从电脑发文件给手机：手机上出现进度和“已接收”，图片显示缩略图；若浏览器没有自动保存，点“保存”。\n5. 让手机切到后台再回来：页面自动重新连上（状态回到“在线”）。\n已验证（2026-10-18）：375×812 移动模拟（Android Chrome UA）下截图检查布局、勾选、选文件、接收图片与“保存”按钮；scrollWidth = 375。未在真实手机上试过。\n",
+  "id": "A03-02",
+  "iteration": "I02",
+  "label": "locally verified",
+  "state": "done",
+  "title": "手机浏览器上能舒适地完成勾选、选择文件、发送和接收",
+  "without_human_check": "Goal run, quiet mode"
+}

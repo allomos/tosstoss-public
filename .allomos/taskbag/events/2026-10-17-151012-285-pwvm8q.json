@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-17T15:10:12Z",
+  "by": "claude/tosstoss-goal",
+  "via": "alm",
+  "command": "unblock",
+  "kind": "task",
+  "id": "A01-03",
+  "changes": [
+    {
+      "field": "state",
+      "from": "blocked",
+      "to": "ready"
+    },
+    {
+      "field": "blocked_by",
+      "from": [
+        "A03-02",
+        "A04-02",
+        "A02-02"
+      ]
+    }
+  ]
+}

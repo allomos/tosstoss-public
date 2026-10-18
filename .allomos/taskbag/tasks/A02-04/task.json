@@ -1,0 +1,10 @@
+{
+  "area": "A02",
+  "holder": "claude-cloudflare",
+  "id": "A02-04",
+  "label": "locally verified",
+  "state": "waiting",
+  "title": "公网版默认不在网络上显示我：开启后同一网络的设备才看得到我",
+  "waiting_on": "在真实手机和电脑上试公网版 https://tosstoss.mypals.workers.dev：同一 Wi-Fi 打开“在网络上显示我”后互相看到并传文件；手机用流量时用房间码互传；切换四种语言",
+  "who": "使用者"
+}

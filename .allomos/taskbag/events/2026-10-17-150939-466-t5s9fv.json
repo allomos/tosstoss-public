@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-17T15:09:39Z",
+  "by": "claude/tosstoss-goal",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A03-02",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "未加屏幕常亮：Wake Lock 需要 https，局域网 http 页面用不了；手机锁屏后传输会中断，需重发"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-17T14:58:47Z",
+  "by": "claude/tosstoss-goal",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A03-01",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "v0.1 设备名先用“设备 XXXX”随机名，存于本机浏览器；更友好的名字和改名在 A02-02"
+    }
+  ]
+}

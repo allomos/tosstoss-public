@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-17T15:08:51Z",
+  "by": "claude/tosstoss-goal",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A04-02",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "流控：发送端最多领先最慢接收端已确认字节 8MB，自身缓冲不超过 4MB；接收端每 1MB 回执一次；60 秒无进展视为失败。发送方进度显示“所有接收方都已确认”的字节数，完成显示“已送达”"
+    }
+  ]
+}

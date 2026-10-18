@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-17T14:55:04Z",
+  "via": "alm",
+  "command": "add task",
+  "kind": "task",
+  "id": "A02-02",
+  "changes": [
+    {
+      "field": "title",
+      "to": "每台设备有易认的名字和设备图标，可以改名，名字刷新后保留"
+    },
+    {
+      "field": "area",
+      "to": "A02"
+    },
+    {
+      "field": "state",
+      "to": "backlog"
+    },
+    {
+      "field": "description",
+      "to": "**Outcome.** 首次打开随机生成中文名（如“微笑的桃子”），显示设备类型（电脑/手机）；可点击改名，保存在本机浏览器中。\n\n**Done means.** 两个标签页显示各自名字和图标；改名后对方列表即时更新；刷新后名字保留。\n"
+    },
+    {
+      "field": "base_branch",
+      "to": "main"
+    }
+  ]
+}

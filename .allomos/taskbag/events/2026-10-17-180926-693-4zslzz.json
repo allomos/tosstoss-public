@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-17T18:09:26Z",
+  "by": "claude-cloudflare",
+  "via": "alm",
+  "command": "wait",
+  "kind": "task",
+  "id": "A04-03",
+  "changes": [
+    {
+      "field": "state",
+      "from": "in_progress",
+      "to": "waiting"
+    },
+    {
+      "field": "waiting_on",
+      "to": "在真实手机和电脑上（同一 Wi-Fi，两边都“对网络公开”或同一房间）发一个文件，传输记录应显示“直连”；再试手机用流量，应显示“直连”或“经服务器”且都能传完"
+    },
+    {
+      "field": "who",
+      "to": "使用者"
+    }
+  ]
+}

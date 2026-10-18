@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-17T15:08:51Z",
+  "by": "claude/tosstoss-goal",
+  "via": "alm",
+  "command": "claim",
+  "kind": "task",
+  "id": "A03-02",
+  "changes": [
+    {
+      "field": "state",
+      "from": "ready",
+      "to": "in_progress"
+    },
+    {
+      "field": "holder",
+      "to": "claude/tosstoss-goal"
+    },
+    {
+      "field": "working_branch",
+      "to": "main"
+    }
+  ]
+}

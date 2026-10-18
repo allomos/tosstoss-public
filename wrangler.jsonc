@@ -1,0 +1,29 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Two deployments of the same code (2026-10-18, the person's decision):
+  //   npm run deploy            → https://tosstoss.mypals.workers.dev, each file at most 20 MB
+  //   npm run deploy:unlimited  → https://<UNLIMITED_WORKER_NAME>.mypals.workers.dev, no limit
+  "name": "tosstoss",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-01",
+  "assets": { "directory": "./public", "binding": "ASSETS", "run_worker_first": ["/ws"] },
+  "durable_objects": { "bindings": [{ "name": "HUB", "class_name": "Hub" }] },
+  // SQLite-backed Durable Objects are the kind the free plan allows.
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Hub"] }],
+  "observability": { "enabled": true },
+  // Largest file per transfer, in bytes; 0 means no limit.
+  "vars": { "MAX_FILE_BYTES": "20971520" },
+  "env": {
+    "unlimited": {
+      // Placeholder: the real, hard-to-guess name is kept out of Git (.unlimited-name, or the
+      // TOSSTOSS_UNLIMITED_NAME environment variable); scripts/unlimited.js puts it in at deploy
+      // time. The placeholder is not a valid Worker name, so `wrangler deploy --env unlimited`
+      // run by hand fails instead of publishing under a guessable name.
+      "name": "__UNLIMITED_WORKER_NAME__",
+      "durable_objects": { "bindings": [{ "name": "HUB", "class_name": "Hub" }] },
+      "vars": { "MAX_FILE_BYTES": "0" },
+      // Names over 54 characters cannot have preview URLs; this one does not need them.
+      "preview_urls": false
+    }
+  }
+}

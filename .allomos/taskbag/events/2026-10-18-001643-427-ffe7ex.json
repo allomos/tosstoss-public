@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-18T00:16:43Z",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A04-04",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "直连失败后的重试间隔暂沿用现有的 60 秒（RETRY_AFTER），使用者可再调整"
+    }
+  ]
+}

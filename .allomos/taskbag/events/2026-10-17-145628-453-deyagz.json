@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-17T14:56:28Z",
+  "by": "claude/tosstoss-goal",
+  "via": "alm",
+  "command": "done",
+  "kind": "task",
+  "id": "A02-01",
+  "changes": [
+    {
+      "field": "state",
+      "from": "in_progress",
+      "to": "done"
+    },
+    {
+      "field": "without_human_check",
+      "to": "Goal run, quiet mode"
+    },
+    {
+      "field": "human_check_steps",
+      "to": "1. 在项目文件夹运行 `npm install`，然后 `npm start`。\n2. 终端会打印 `http://192.168.x.x:8080` 这样的网址。\n3. 运行 `npm test`：presence 测试应全部通过（两台设备互相发现、改名、离开都即时通知）。\n"
+    }
+  ]
+}
