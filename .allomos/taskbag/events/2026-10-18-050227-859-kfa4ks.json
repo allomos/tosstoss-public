@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-18T05:02:27Z",
+  "by": "claude-plaza",
+  "via": "alm",
+  "command": "ready",
+  "kind": "task",
+  "id": "A03-05",
+  "changes": [
+    {
+      "field": "state",
+      "from": "backlog",
+      "to": "ready"
+    }
+  ]
+}
