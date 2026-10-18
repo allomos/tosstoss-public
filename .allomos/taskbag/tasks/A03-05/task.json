@@ -2,6 +2,9 @@
   "area": "A03",
   "holder": "room-tab",
   "id": "A03-05",
-  "state": "in_progress",
-  "title": "顶部标签栏有“局域网公开 / 广场 / 房间 / 下线”四个选项，选“房间”即进入房间"
+  "label": "locally verified",
+  "state": "waiting",
+  "title": "顶部标签栏有“局域网公开 / 广场 / 房间 / 下线”四个选项，选“房间”即进入房间",
+  "waiting_on": "合并到 main 并部署（两个 Cloudflare 部署）的同意",
+  "who": "使用者"
 }

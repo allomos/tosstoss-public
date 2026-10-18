@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-18T05:07:08Z",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A03-05",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "较短的标签：en LAN / Plaza / Room / Offline，ja LAN 公開 / 広場 / ルーム / オフライン，es Red local / Plaza / Sala / Desconectado；房间里整页（含“我的设备”卡片）变青绿色，标签底色也随之变"
+    }
+  ]
+}

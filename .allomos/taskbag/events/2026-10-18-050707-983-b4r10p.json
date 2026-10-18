@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-18T05:07:07Z",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A03-05",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "选“房间”时回到上次的房间码（localStorage tosstoss.room），没有就新建；选择存于 tosstoss.place（lan/plaza/room）；房间面板放在标签下面，原“通过互联网传递文件”卡片和“离开房间”按钮去掉"
+    }
+  ]
+}
