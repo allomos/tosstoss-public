@@ -1,6 +1,6 @@
 {
   "area": "A03",
-  "handoff_note": "已合并到 main（3d4db9f）并部署两个公网版本；只差使用者亲手检查，确认后 alm checked / alm done",
+  "handoff_note": "2026-10-18：下线提示改成一个面板（图标、你现在已下线、说明、怎样重新上线），已合并到 main（b9ae2d3）并部署两个公网版本",
   "id": "A03-06",
   "label": "locally verified",
   "state": "waiting",
