@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-18T04:52:30Z",
+  "by": "claude-plaza",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A02-06",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "广场的选择记在 localStorage tosstoss.place；旧的 tosstoss.visible 不再读取，所以以前选过“隐身”或“公开”的人都回到默认的局域网内公开；在房间里“广场”不可选"
+    }
+  ]
+}

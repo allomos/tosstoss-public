@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-18T04:52:30Z",
+  "by": "claude-plaza",
+  "via": "alm",
+  "command": "wait",
+  "kind": "task",
+  "id": "A02-06",
+  "changes": [
+    {
+      "field": "state",
+      "from": "in_progress",
+      "to": "waiting"
+    },
+    {
+      "field": "waiting_on",
+      "to": "合并到 main 并部署两个公网版本（npm run deploy、npm run deploy:unlimited），然后在两台不同网络的真实设备上都选“广场”，互发文件试“接收/拒绝”"
+    },
+    {
+      "field": "who",
+      "to": "使用者"
+    }
+  ]
+}

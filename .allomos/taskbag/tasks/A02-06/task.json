@@ -2,6 +2,9 @@
   "area": "A02",
   "holder": "claude-plaza",
   "id": "A02-06",
-  "state": "in_progress",
-  "title": "公网版可以进入广场：所有选广场的设备互相可见，收文件前先确认"
+  "label": "locally verified",
+  "state": "waiting",
+  "title": "公网版可以进入广场：所有选广场的设备互相可见，收文件前先确认",
+  "waiting_on": "合并到 main 并部署两个公网版本（npm run deploy、npm run deploy:unlimited），然后在两台不同网络的真实设备上都选“广场”，互发文件试“接收/拒绝”",
+  "who": "使用者"
 }
