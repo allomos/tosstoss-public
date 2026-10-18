@@ -1,0 +1,5 @@
+**结果.** wrangler.jsonc 的 vars 里有 PAUSED 开关（两个版本各一份）。设为 "1" 并部署后，所有打开投桃的页面整页显示“投桃暂停服务”，不再重连；Durable Object 不被叫醒，几乎不产生费用。改回 "0" 再部署即恢复。
+
+**完成标准.** 本地 `npm run dev:cf` 下 PAUSED=1 时页面显示暂停页、Durable Object 不被调用；PAUSED=0 时一切照常；README 写明怎么用（含后台改变量的办法和会被下次部署覆盖的提醒）；`npm test`、`npm run test:cf` 通过。
+
+**备注.** 使用者 2026-10-18 提出：担心 Durable Object 在付费套餐上费用失控，要一个预防性的暂停办法。按套餐自动暂停（需要一个读账单的令牌）另议，未做。

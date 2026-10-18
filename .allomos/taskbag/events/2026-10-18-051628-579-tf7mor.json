@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-18T05:16:28Z",
+  "by": "claude-paused",
+  "via": "alm",
+  "command": "claim",
+  "kind": "task",
+  "id": "A02-07",
+  "changes": [
+    {
+      "field": "state",
+      "from": "ready",
+      "to": "in_progress"
+    },
+    {
+      "field": "holder",
+      "to": "claude-paused"
+    },
+    {
+      "field": "working_branch",
+      "to": "claude/paused"
+    }
+  ]
+}
