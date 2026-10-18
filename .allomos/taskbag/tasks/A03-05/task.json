@@ -1,10 +1,10 @@
 {
   "area": "A03",
-  "holder": "room-tab",
+  "handoff_note": "已合并到 main（3d4db9f）并部署两个公网版本；只差使用者亲手检查，确认后 alm checked / alm done",
   "id": "A03-05",
   "label": "locally verified",
   "state": "waiting",
   "title": "顶部标签栏有“局域网公开 / 广场 / 房间 / 下线”四个选项，选“房间”即进入房间",
-  "waiting_on": "合并到 main 并部署（两个 Cloudflare 部署）的同意",
+  "waiting_on": "已部署两个公网版本（2026-10-18）。请在手机上打开 https://tosstoss.mypals.workers.dev ：四个标签“局域网公开 / 广场 / 房间 / 下线”；选“房间”进入房间、另一台设备扫码加入能互相看到；“重建房间”在右边、红色；切到别的标签离开房间；刷新保留选择",
   "who": "使用者"
 }

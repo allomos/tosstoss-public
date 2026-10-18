@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-18T05:15:47Z",
+  "by": "room-tab",
+  "via": "alm",
+  "command": "release",
+  "kind": "task",
+  "id": "A03-05",
+  "changes": [
+    {
+      "field": "holder",
+      "from": "room-tab"
+    },
+    {
+      "field": "handoff_note",
+      "to": "已合并到 main（3d4db9f）并部署两个公网版本；只差使用者亲手检查，确认后 alm checked / alm done"
+    }
+  ]
+}

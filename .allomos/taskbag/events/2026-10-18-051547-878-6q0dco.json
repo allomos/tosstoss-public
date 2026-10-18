@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-18T05:15:47Z",
+  "by": "room-tab",
+  "via": "alm",
+  "command": "wait",
+  "kind": "task",
+  "id": "A03-05",
+  "changes": [
+    {
+      "field": "waiting_on",
+      "from": "合并到 main 并部署（两个 Cloudflare 部署）的同意",
+      "to": "已部署两个公网版本（2026-10-18）。请在手机上打开 https://tosstoss.mypals.workers.dev ：四个标签“局域网公开 / 广场 / 房间 / 下线”；选“房间”进入房间、另一台设备扫码加入能互相看到；“重建房间”在右边、红色；切到别的标签离开房间；刷新保留选择"
+    }
+  ]
+}

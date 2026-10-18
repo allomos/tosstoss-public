@@ -1,10 +1,10 @@
 {
   "area": "A03",
-  "holder": "room-tab",
+  "handoff_note": "已合并到 main（3d4db9f）并部署两个公网版本；只差使用者亲手检查，确认后 alm checked / alm done",
   "id": "A03-06",
   "label": "locally verified",
   "state": "waiting",
   "title": "选“下线”后页面只显示“已下线”的提示，下面的卡片都隐藏",
-  "waiting_on": "合并到 main 并部署（两个 Cloudflare 部署）的同意",
+  "waiting_on": "已部署两个公网版本（2026-10-18）。请在手机上点“下线”：只剩顶部、“我的设备”和“你现在已下线”；再选别的标签，卡片和传输记录都回来",
   "who": "使用者"
 }
