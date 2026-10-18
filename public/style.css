@@ -314,3 +314,8 @@ main {
 
 /* Take / decline a file offered in the plaza. */
 .btn.small { min-height: 36px; padding: 6px 12px; font-size: 14px; border-radius: 10px; }
+
+/* 重建房间: set apart from the room's other buttons (it leaves the room): on the right, dashed and quieter. */
+.btn.renew { margin-left: auto; border-style: dashed; color: var(--muted); }
+.btn.renew::before { content: "↻"; margin-right: 5px; }
+.btn.renew:hover { color: var(--accent-strong); border-color: var(--accent); }
