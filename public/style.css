@@ -315,7 +315,10 @@ main {
 /* Take / decline a file offered in the plaza. */
 .btn.small { min-height: 36px; padding: 6px 12px; font-size: 14px; border-radius: 10px; }
 
-/* 重建房间: set apart from the room's other buttons (it leaves the room): on the right, dashed and quieter. */
-.btn.renew { margin-left: auto; border-style: dashed; color: var(--muted); }
+/* 重建房间: set apart from the room's other buttons (it leaves the room): on the right, dashed, in red. */
+.btn.renew { --renew: #c8382c; --renew-soft: #fdecea; margin-left: auto; border-style: dashed; border-color: color-mix(in srgb, var(--renew) 55%, transparent); color: var(--renew); }
 .btn.renew::before { content: "↻"; margin-right: 5px; }
-.btn.renew:hover { color: var(--accent-strong); border-color: var(--accent); }
+.btn.renew:hover { background: var(--renew-soft); border-color: var(--renew); }
+@media (prefers-color-scheme: dark) {
+  .btn.renew { --renew: #ff8a7a; --renew-soft: #3a1d1a; }
+}
