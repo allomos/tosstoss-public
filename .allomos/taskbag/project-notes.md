@@ -13,7 +13,7 @@ What every session must know, whatever its task. Keep it short, and change lines
 
 ## Pitfalls
 
-- Git remote `origin`: private GitHub repo mypals-ml/tosstoss (moved from willwhui on 2026-10-18; the person plans to open-source it, so never commit the unlimited name). Push after committing.
+- Git remote `origin`: public GitHub repo allomos/tosstoss-public (moved from mypals-ml/tosstoss-public on 2026-10-18; the private repo is mypals-ml/tosstoss, so never commit the unlimited name). Push after committing.
 - Background/preview tabs get no requestAnimationFrame; the page renders with timers.
 - Testing in one browser: use different origins (localhost, 127.0.0.1, the LAN IP) so each tab gets its own name in localStorage.
 - `crypto.randomUUID` and Wake Lock need https; LAN pages are plain http.
