@@ -299,3 +299,6 @@ main {
     --accent-soft: #1d3b38;
   }
 }
+
+/* Take / decline a file offered in the plaza. */
+.btn.small { min-height: 36px; padding: 6px 12px; font-size: 14px; border-radius: 10px; }

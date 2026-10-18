@@ -9,7 +9,7 @@
     sendBtn: $('sendBtn'), sendHint: $('sendHint'), transfersCard: $('transfersCard'),
     transfers: $('transfers'), clearDone: $('clearDone'), overlay: $('dragOverlay'), toast: $('toast'),
     langSelect: $('langSelect'), emptyHow: $('emptyHow'), netCard: $('netCard'), netIp: $('netIp'), netRoom: $('netRoom'),
-    modeHint: $('modeHint'), modeHiddenOpt: $('modeHiddenOpt'), modePublic: $('modePublic'), createRoom: $('createRoom'), joinRoom: $('joinRoom'),
+    modeHint: $('modeHint'), modePlazaOpt: $('modePlazaOpt'), modeLan: $('modeLan'), createRoom: $('createRoom'), joinRoom: $('joinRoom'),
     roomCode: $('roomCode'), copyRoom: $('copyRoom'), leaveRoom: $('leaveRoom'),
     qrRoom: $('qrRoom'), qrDialog: $('qrDialog'), qrBox: $('qrBox'), qrCode: $('qrCode'), qrLink: $('qrLink'), qrClose: $('qrClose'),
   };
@@ -21,7 +21,7 @@
     tablet: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2.5"/><path d="M11 18h2"/></svg>',
   };
   const kind = (d) => t('kind.' + (ICONS[d] ? d : 'desktop'));
-  const VISIBLE_KEY = 'tosstoss.visible'; // '1' public, else hidden; offline is not kept
+  const PLACE_KEY = 'tosstoss.place'; // 'plaza', else public on the LAN (the default); offline is not kept
   const ROOM_RE = /^[A-Z0-9]{4,12}$/;
 
   const state = {
@@ -36,16 +36,17 @@
     net: false,
     room: readRoom(),
     maxFile: 0, // bytes per file; 0 = no limit (the server says in its welcome)
-    visible: readVisible(),
+    plaza: readPlaza(), // the person chose the plaza (internet version, outside rooms)
+    inPlaza: false, // the server put us in the plaza (its welcome says so)
   };
 
   function readRoom() {
     const r = (new URLSearchParams(location.search).get('room') || '').toUpperCase();
     return ROOM_RE.test(r) ? r : '';
   }
-  // Default: hidden on the internet; the person turns it on.
-  function readVisible() {
-    try { return localStorage.getItem(VISIBLE_KEY) === '1'; } catch { return false; }
+  // Default: public on the LAN; the plaza only when the person chose it.
+  function readPlaza() {
+    try { return localStorage.getItem(PLACE_KEY) === 'plaza'; } catch { return false; }
   }
 
   // ---------- helpers ----------
@@ -76,12 +77,13 @@
   function connect() {
     setStatus('connecting');
     const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const ws = new WebSocket(`${proto}//${location.host}/ws${state.room ? '?room=' + state.room : ''}`);
+    const query = state.room ? '?room=' + state.room : state.plaza ? '?plaza=1' : '';
+    const ws = new WebSocket(`${proto}//${location.host}/ws${query}`);
     ws.binaryType = 'arraybuffer';
     state.ws = ws;
     ws.onopen = () => {
       state.retry = 0;
-      ws.send(JSON.stringify({ type: 'hello', name: Identity.name, device: Identity.device, hidden: !state.visible }));
+      ws.send(JSON.stringify({ type: 'hello', name: Identity.name, device: Identity.device }));
     };
     ws.onmessage = (ev) => {
       if (ev.data instanceof ArrayBuffer) { Transfer.handleBinary(ev.data); return; }
@@ -112,7 +114,7 @@
     renderPeers();
   }
 
-  // Join another group (a room, or back to the network) or reappear with a new visibility.
+  // Join another group (a room, the plaza, or back to the network).
   function reconnect() {
     const old = state.ws;
     dropConnection();
@@ -132,6 +134,7 @@
         // Opened via localhost? Show the LAN address others should open instead.
         state.lanUrls = msg.urls || [];
         state.net = 'room' in msg;
+        state.inPlaza = !!msg.plaza;
         state.maxFile = msg.maxFileBytes || 0;
         renderLimit();
         renderNet();
@@ -165,20 +168,20 @@
     updateSend();
   }
 
-  // ---------- who can see me: public / hidden / offline ----------
-  // Hidden exists only on the internet version, and a room always shows you.
+  // ---------- who can see me: public on the LAN / plaza / offline ----------
+  // The plaza exists only on the internet version, and not while in a room.
   function renderMode() {
-    const hiddenWorks = state.net && !state.room;
-    el.modeHiddenOpt.hidden = !state.net;
-    el.modeHiddenOpt.querySelector('input').disabled = !hiddenWorks;
-    el.modePublic.textContent = t(state.net ? 'mode.public' : 'mode.online');
-    const mode = !state.wantOnline ? 'offline' : state.visible || !hiddenWorks ? 'public' : 'hidden';
+    const plazaWorks = state.net && !state.room;
+    el.modePlazaOpt.hidden = !state.net;
+    el.modePlazaOpt.querySelector('input').disabled = !plazaWorks;
+    el.modeLan.textContent = t(state.net ? 'mode.public' : 'mode.online');
+    const mode = !state.wantOnline ? 'offline' : state.plaza && plazaWorks ? 'plaza' : 'lan';
     for (const r of document.querySelectorAll('input[name="mode"]')) r.checked = r.value === mode;
     el.modeHint.textContent = t(
       mode === 'offline' ? 'mode.offlineHint'
         : !state.net ? 'mode.lanHint'
           : state.room ? 'mode.roomHint'
-            : mode === 'public' ? 'net.visibleHint' : 'net.hiddenHint');
+            : mode === 'plaza' ? 'mode.plazaHint' : 'net.visibleHint', { max: fmtMax() });
   }
 
   for (const r of document.querySelectorAll('input[name="mode"]')) {
@@ -190,10 +193,10 @@
         else setStatus('offline');
         return;
       }
-      const visible = r.value === 'public';
-      const changed = visible !== state.visible;
-      state.visible = visible;
-      try { localStorage.setItem(VISIBLE_KEY, visible ? '1' : '0'); } catch {}
+      const plaza = r.value === 'plaza';
+      const changed = plaza !== state.plaza;
+      state.plaza = plaza;
+      try { localStorage.setItem(PLACE_KEY, plaza ? 'plaza' : 'lan'); } catch {}
       if (!state.wantOnline) {
         state.wantOnline = true;
         connect();
@@ -246,6 +249,7 @@
     clearTimeout(retries.get(id));
     retries.delete(id);
     if (!state.selected.has(id)) return;
+    if (state.inPlaza) return setLink(id, 'relay'); // no direct links in the plaza
     if (Direct.isOpen(id)) return setLink(id, 'direct');
     const run = (probeRuns.get(id) || 0) + 1;
     probeRuns.set(id, run);
@@ -287,6 +291,7 @@
   function linkBadge(id) {
     const st = state.selected.has(id) && links.get(id);
     if (!st) return '';
+    if (state.inPlaza) return `<span class="st-wrap"><span class="link-st relay">${esc(t('link.relayMax', { max: fmtMax() }))}</span></span>`;
     const text = st === 'probing' ? t('link.probing')
       : st === 'direct' ? t(state.maxFile ? 'link.directFree' : 'link.direct')
       : state.maxFile ? t('link.relayMax', { max: fmtMax() }) : t('link.relay');
@@ -339,7 +344,8 @@
   // ---------- picking files ----------
   const fmtMax = () => fmtSize(state.maxFile).replace('.0 ', ' ');
   function renderLimit() {
-    document.querySelector('.drop-sub').textContent = state.maxFile ? t('drop.subMax', { max: fmtMax() }) : t('drop.sub');
+    document.querySelector('.drop-sub').textContent = state.inPlaza ? t('drop.subPlaza', { max: fmtMax() })
+      : state.maxFile ? t('drop.subMax', { max: fmtMax() }) : t('drop.sub');
   }
 
   // Any size can be picked: the limit applies only when a file has to go through the server,
@@ -444,6 +450,9 @@
     if (state.room) {
       el.emptyHow.textContent = t('peers.emptyRoom');
       el.pageUrl.textContent = roomLink();
+    } else if (state.inPlaza) {
+      el.emptyHow.textContent = t('peers.emptyPlaza');
+      el.pageUrl.textContent = location.origin;
     } else if (state.net) {
       el.emptyHow.textContent = t('peers.emptyNet');
       el.pageUrl.textContent = location.origin;
@@ -546,7 +555,7 @@
   renderPeers();
   renderPicked();
   Transfer._socket = () => state.ws;
-  Direct.init({ myId: () => state.myId, signal: (to, data) => sendJSON({ type: 'signal', to, data }) });
+  Direct.init({ myId: () => state.myId, signal: (to, data) => sendJSON({ type: 'signal', to, data }), allowed: () => !state.inPlaza });
   Transfer.init();
   connect();
 })();

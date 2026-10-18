@@ -2,7 +2,8 @@
 // File transfer: directly between devices when a direct link opens (direct.js), else through the server.
 // Sending: file-start → binary chunks (36-char transfer ID + bytes) → file-end; receivers ack as they go.
 // The same messages travel both ways, so one send loop serves direct and relayed receivers together.
-// Receiving is automatic: every announced file is collected and saved without asking.
+// Receiving is automatic: every announced file is collected and saved without asking,
+// except in the plaza, where the server marks offers `ask` and the receiver takes or declines each.
 (function () {
   const CHUNK = 256 * 1024;
   const ID_LEN = 36;
@@ -13,6 +14,7 @@
   const COLLAPSE_AT = 32 * 1024 * 1024; // merge received parts into a Blob every 32 MB
   const DIRECT_WAIT = 5000; // how long to try a direct link before using the server
   const DIRECT_HIGH = 1024 * 1024; // pause while this much waits in a direct channel
+  const ASK_WAIT = 60000; // plaza: how long receivers have to take a file
 
   /** @type {Map<string, object>} */
   const items = new Map(); // transfer records shown in the list, newest first
@@ -52,10 +54,14 @@
       if (it.status === 'done') meta = `${fmtSize(it.size)} · ${who} · ${t(it.dir === 'in' ? 'tx.received' : 'tx.delivered')}`;
       else if (it.status === 'failed') meta = `${who} · ${esc(t(it.error || 'tx.failed', it.errorVars))}`;
       else if (it.status === 'queued') meta = `${fmtSize(it.size)} · ${who} · ${t('tx.queued')}`;
+      else if (it.status === 'asking') meta = `${fmtSize(it.size)} · ${who} · ${t('tx.offer')}`;
+      else if (it.waiting && it.waiting.size) meta = `${fmtSize(it.size)} · ${who} · ${t('tx.asking')}`;
       else meta = `${fmtSize(it.done)} / ${fmtSize(it.size)} · ${who} · ${pct}%`;
       if (it.route && (it.status === 'done' || it.status === 'sending' || it.status === 'receiving')) meta += ` · ${t('tx.' + it.route)}`;
       let actions = '';
-      if (it.url) {
+      if (it.status === 'asking') {
+        actions = `<button class="btn primary small" type="button" data-accept="${it.id}">${t('accept')}</button><button class="btn ghost small" type="button" data-decline="${it.id}">${t('decline')}</button>`;
+      } else if (it.url) {
         actions = `${it.thumb ? `<img class="thumb" src="${it.url}" alt="">` : ''}<a class="save-btn" href="${it.url}" download="${esc(it.name)}">${t('save')}</a>`;
       } else if (it.dir === 'out' && (it.status === 'sending' || it.status === 'queued')) {
         actions = `<button class="icon-btn" type="button" data-cancel="${it.id}" aria-label="${t('cancelSend')}">✕</button>`;
@@ -215,6 +221,24 @@
       }
       if (item.status !== 'sending') return;
     }
+    // Plaza: wait until every receiver took the file or declined; silence counts as no.
+    if (item.waiting) {
+      const asked = Date.now();
+      scheduleRender();
+      while (item.waiting.size && item.status === 'sending') {
+        if (Date.now() - asked > ASK_WAIT) {
+          for (const p of item.waiting) { item.acks.delete(p); miss(item, p, 'why.noAnswer'); }
+          item.waiting.clear();
+          break;
+        }
+        await nap(1000);
+      }
+      if (item.status !== 'sending') return;
+      if (!item.acks.size) {
+        App.sendJSON({ type: 'file-cancel', transferId: id });
+        return fail(item, 'err.declined');
+      }
+    }
     if (!item.acks.size) return fail(item, 'err.peerOffline');
     setRoute(item);
     scheduleRender();
@@ -268,6 +292,19 @@
     item.accepted = true;
     for (const pid of msg.to) item.acks.set(pid, 0);
     for (const pid of item.to) if (!item.direct.has(pid) && !msg.to.includes(pid)) miss(item, pid, 'why.offline');
+    if (msg.ask) item.waiting = new Set(msg.to);
+    poke();
+  }
+
+  // Plaza: a receiver took the file or declined it.
+  function onAnswer(msg) {
+    const item = items.get(msg.transferId);
+    if (!item || item.dir !== 'out' || !item.waiting || !item.waiting.delete(msg.from)) return;
+    if (!msg.accept) {
+      item.acks.delete(msg.from);
+      miss(item, msg.from, 'why.declined');
+    }
+    scheduleRender();
     poke();
   }
 
@@ -285,6 +322,7 @@
     const item = items.get(msg.transferId);
     if (!item || !item.acks || !item.acks.has(msg.peer)) return;
     item.acks.delete(msg.peer);
+    if (item.waiting) item.waiting.delete(msg.peer);
     miss(item, msg.peer, toastKey === 'toast.directLost' ? 'why.directLost' : 'why.left');
     if (!item.acks.size) fail(item, 'err.peerOffline');
     else { item.done = delivered(item); setRoute(item); finishOut(item); }
@@ -316,7 +354,8 @@
   function onRejected(msg) {
     const item = items.get(msg.transferId);
     if (!item || item.dir !== 'out') return;
-    fail(item, 'err.tooLarge');
+    if (msg.reason === 'rate') fail(item, 'err.rate', { n: msg.per });
+    else fail(item, 'err.tooLarge');
     poke();
   }
 
@@ -330,18 +369,43 @@
     poke();
   }
 
-  // ---------- receiving (always automatic) ----------
+  // ---------- receiving (automatic, except plaza offers) ----------
   // `via` is the device a direct link comes from; null when the server relays the file.
   function onStart(msg, via) {
     if (typeof msg.transferId !== 'string' || msg.transferId.length !== ID_LEN || incoming.has(msg.transferId)) return;
     const size = Math.max(0, Number(msg.size) || 0);
+    const asking = !via && msg.ask === true;
     const item = {
-      id: msg.transferId, dir: 'in', name: String(msg.name || 'file').slice(0, 255), size, done: 0, status: 'receiving',
+      id: msg.transferId, dir: 'in', name: String(msg.name || 'file').slice(0, 255), size, done: 0, status: asking ? 'asking' : 'receiving',
       peer: App.peerName(msg.from, msg.fromName), route: via ? 'direct' : 'relay',
     };
     items.set(item.id, item);
-    incoming.set(item.id, { item, via, mime: String(msg.mime || '').slice(0, 100), parts: [], blobs: [], pending: 0, acked: 0 });
+    incoming.set(item.id, { item, via, asking, mime: String(msg.mime || '').slice(0, 100), parts: [], blobs: [], pending: 0, acked: 0 });
     scheduleRender();
+    if (!asking) return;
+    App.toast(t('toast.offer', { peer: item.peer, file: item.name }));
+    // The sender stops waiting after ASK_WAIT and the server soon after; never keep a stale offer.
+    setTimeout(() => {
+      const rx = incoming.get(item.id);
+      if (!rx || !rx.asking) return;
+      incoming.delete(item.id);
+      fail(item, 'err.offerExpired');
+    }, ASK_WAIT + 15000);
+  }
+
+  // Plaza: the person takes or declines an offered file.
+  function answer(id, accept) {
+    const rx = incoming.get(id);
+    if (!rx || !rx.asking) return;
+    App.sendJSON({ type: 'file-answer', transferId: id, accept });
+    rx.asking = false;
+    if (accept) {
+      rx.item.status = 'receiving';
+      render();
+    } else {
+      incoming.delete(id);
+      fail(rx.item, 'err.declinedByMe');
+    }
   }
 
   // Acks go back the way the file comes.
@@ -354,7 +418,7 @@
     if (buf.byteLength < ID_LEN) return;
     const id = dec.decode(new Uint8Array(buf, 0, ID_LEN));
     const rx = incoming.get(id);
-    if (!rx || rx.via !== via) return;
+    if (!rx || rx.via !== via || rx.asking) return;
     const data = buf.slice(ID_LEN);
     rx.parts.push(data);
     rx.pending += data.byteLength;
@@ -412,8 +476,10 @@
     _socket: null,
     init() {
       App.el.transfers.addEventListener('click', (e) => {
-        const id = e.target.dataset.cancel;
-        if (id) cancel(id);
+        const d = e.target.dataset;
+        if (d.cancel) cancel(d.cancel);
+        else if (d.accept) answer(d.accept, true);
+        else if (d.decline) answer(d.decline, false);
       });
       // Messages over a direct link: the same ones, from that device only.
       Direct.onMessage((peer, data) => {
@@ -440,6 +506,7 @@
         case 'file-end': onEnd(msg, null); break;
         case 'file-cancel': onCancel(msg, null); break;
         case 'file-accepted': onAccepted(msg); break;
+        case 'file-answer': onAnswer(msg); break;
         case 'ack': onAck(msg); break;
         case 'file-failed': onFailed(msg); break;
         case 'file-rejected': onRejected(msg); break;

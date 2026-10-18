@@ -15,6 +15,7 @@
 
   let myId = () => null;
   let signal = () => false;
+  let allowed = () => true; // false in the plaza: strangers would see each other's IP address
   const handlers = { message() {}, closed() {}, drain() {}, status() {} };
 
   // The device that starts the link makes the offer; the other one only answers.
@@ -93,7 +94,7 @@
   // An open channel to this device, opening one if needed; null when it does not open in time.
   // After a failed attempt the server is used for a while, unless `force` (a person asked).
   async function open(peerId, timeoutMs, force) {
-    if (!window.RTCPeerConnection || Direct.disabled || !myId()) return null;
+    if (!window.RTCPeerConnection || Direct.disabled || !allowed() || !myId()) return null;
     const ready = links.get(peerId);
     if (ready && ready.dc.readyState === 'open') return ready.dc;
     if (!ready && !force && Date.now() - (failedAt.get(peerId) || 0) < RETRY_AFTER) return null;
@@ -109,6 +110,7 @@
     init(opts) {
       myId = opts.myId;
       signal = opts.signal;
+      if (opts.allowed) allowed = opts.allowed;
     },
     onMessage(f) { handlers.message = f; },
     onClosed(f) { handlers.closed = f; },
@@ -144,7 +146,7 @@
       const max = link && link.pc.sctp && link.pc.sctp.maxMessageSize;
       return Math.min(64 * 1024, max || 64 * 1024);
     },
-    handleSignal(msg) { onSignal(msg.from, msg.data); },
+    handleSignal(msg) { if (allowed()) onSignal(msg.from, msg.data); },
     // Our server connection dropped: device IDs change when we come back, so every link ends.
     reset() {
       for (const [id, link] of [...links]) drop(id, link);
