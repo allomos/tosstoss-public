@@ -250,18 +250,19 @@ main {
 .lang:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 2px; }
 
 /* Who can see me / rooms (internet version) */
-.net h2 { margin-bottom: 10px; }
 .hint.left { text-align: left; margin-top: 4px; }
-.net-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.room-panel { margin-top: 10px; }
+.room-line { font-size: 15px; }
+.net-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .room-code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; color: var(--accent-strong); user-select: all; }
 
-/* Who can see me: one choice of three */
+/* Who can see me: one choice of four (two on the LAN version) */
 .mode { flex-basis: 100%; }
 .seg { display: flex; padding: 3px; border-radius: 12px; background: var(--bg); border: 1px solid var(--line); }
 .seg label { flex: 1; position: relative; }
 .seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
 .seg span {
-  display: flex; align-items: center; justify-content: center; min-height: 36px; padding: 0 8px;
+  display: flex; align-items: center; justify-content: center; min-height: 36px; padding: 0 6px; line-height: 1.2;
   border-radius: 9px; font-size: 14px; color: var(--muted); text-align: center; transition: background .15s, color .15s;
 }
 .seg input:checked + span { background: var(--surface); color: var(--accent-strong); font-weight: 600; box-shadow: 0 1px 3px rgba(0, 0, 0, .12); }
@@ -269,6 +270,7 @@ main {
 .seg input:disabled + span { opacity: .4; }
 .seg input:disabled { cursor: not-allowed; }
 .seg input:focus-visible + span { outline: 2px solid var(--accent-strong); outline-offset: 1px; }
+@media (max-width: 420px) { .seg span { font-size: 13px; padding: 0 3px; } }
 
 /* Room QR code */
 .qr-dialog {
@@ -282,17 +284,19 @@ main {
 .qr-code-line { margin: 14px 0 4px; font-size: 15px; }
 .qr-link { margin: 0 0 16px; font-size: 13px; color: var(--muted); word-break: break-all; user-select: all; }
 
-/* In a room: from the room card down, a teal palette, so it is clear the page is in a room. */
-.in-room #netCard, .in-room #netCard ~ *, .in-room .qr-dialog {
+/* In a room: a teal palette for the whole page, so it is clear the page is in a room. */
+.in-room main, .in-room .qr-dialog {
   --surface: #f1fbf9;
+  --bg: #e4f4f1;
   --line: #c9e7e1;
   --accent: #0f8f84;
   --accent-strong: #0b6f67;
   --accent-soft: #d4f1ec;
 }
 @media (prefers-color-scheme: dark) {
-  .in-room #netCard, .in-room #netCard ~ *, .in-room .qr-dialog {
+  .in-room main, .in-room .qr-dialog {
     --surface: #182625;
+    --bg: #101b1a;
     --line: #2a4744;
     --accent: #3fc2b4;
     --accent-strong: #6adacd;

@@ -33,30 +33,20 @@
       <div class="mode">
         <div class="seg" role="radiogroup" data-i18n-label="mode.label">
           <label><input type="radio" name="mode" value="lan"><span id="modeLan" data-i18n="mode.public"></span></label>
-          <label id="modePlazaOpt"><input type="radio" name="mode" value="plaza"><span data-i18n="mode.plaza"></span></label>
+          <label class="net-only" hidden><input type="radio" name="mode" value="plaza"><span data-i18n="mode.plaza"></span></label>
+          <label class="net-only" hidden><input type="radio" name="mode" value="room"><span data-i18n="mode.room"></span></label>
           <label><input type="radio" name="mode" value="offline"><span data-i18n="mode.offline"></span></label>
         </div>
         <p id="modeHint" class="hint left"></p>
-      </div>
-    </section>
-
-    <!-- Only on the internet version (the server tells the page it supports rooms). -->
-    <section id="netCard" class="card net" hidden>
-      <div id="netIp">
-        <h2 data-i18n="room.title"></h2>
-        <p class="hint left" data-i18n="room.intro"></p>
-        <div class="net-actions">
-          <button id="createRoom" class="btn ghost" type="button" data-i18n="room.create"></button>
-          <button id="joinRoom" class="btn ghost" type="button" data-i18n="room.join"></button>
-        </div>
-      </div>
-      <div id="netRoom" hidden>
-        <h2><span data-i18n="room.label"></span> <b id="roomCode" class="room-code"></b></h2>
-        <p class="hint left" data-i18n="room.hint"></p>
-        <div class="net-actions">
-          <button id="copyRoom" class="btn ghost" type="button" data-i18n="room.copy"></button>
-          <button id="qrRoom" class="btn ghost" type="button" data-i18n="room.qr"></button>
-          <button id="leaveRoom" class="btn ghost" type="button" data-i18n="room.leave"></button>
+        <!-- In a room (internet version only). -->
+        <div id="netRoom" class="room-panel" hidden>
+          <div class="room-line"><span data-i18n="room.label"></span> <b id="roomCode" class="room-code"></b></div>
+          <div class="net-actions">
+            <button id="copyRoom" class="btn ghost small" type="button" data-i18n="room.copy"></button>
+            <button id="qrRoom" class="btn ghost small" type="button" data-i18n="room.qr"></button>
+            <button id="joinRoom" class="btn ghost small" type="button" data-i18n="room.joinOther"></button>
+            <button id="createRoom" class="btn ghost small" type="button" data-i18n="room.new"></button>
+          </div>
         </div>
       </div>
     </section>

@@ -8,9 +8,9 @@
     pageUrl: $('pageUrl'), drop: $('drop'), fileInput: $('fileInput'), picked: $('picked'),
     sendBtn: $('sendBtn'), sendHint: $('sendHint'), transfersCard: $('transfersCard'),
     transfers: $('transfers'), clearDone: $('clearDone'), overlay: $('dragOverlay'), toast: $('toast'),
-    langSelect: $('langSelect'), emptyHow: $('emptyHow'), netCard: $('netCard'), netIp: $('netIp'), netRoom: $('netRoom'),
-    modeHint: $('modeHint'), modePlazaOpt: $('modePlazaOpt'), modeLan: $('modeLan'), createRoom: $('createRoom'), joinRoom: $('joinRoom'),
-    roomCode: $('roomCode'), copyRoom: $('copyRoom'), leaveRoom: $('leaveRoom'),
+    langSelect: $('langSelect'), emptyHow: $('emptyHow'), netRoom: $('netRoom'),
+    modeHint: $('modeHint'), modeLan: $('modeLan'), createRoom: $('createRoom'), joinRoom: $('joinRoom'),
+    roomCode: $('roomCode'), copyRoom: $('copyRoom'),
     qrRoom: $('qrRoom'), qrDialog: $('qrDialog'), qrBox: $('qrBox'), qrCode: $('qrCode'), qrLink: $('qrLink'), qrClose: $('qrClose'),
   };
   const t = (k, v) => I18n.t(k, v);
@@ -21,7 +21,8 @@
     tablet: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2.5"/><path d="M11 18h2"/></svg>',
   };
   const kind = (d) => t('kind.' + (ICONS[d] ? d : 'desktop'));
-  const PLACE_KEY = 'tosstoss.place'; // 'plaza', else public on the LAN (the default); offline is not kept
+  const PLACE_KEY = 'tosstoss.place'; // 'lan' (the default) | 'plaza' | 'room'; offline is not kept
+  const ROOM_KEY = 'tosstoss.room'; // the last room, to go back to when the person picks 房间
   const ROOM_RE = /^[A-Z0-9]{4,12}$/;
 
   const state = {
@@ -34,19 +35,39 @@
     retry: 0,
     // Internet version only: the server says so in its welcome (it sends a room field).
     net: false,
-    room: readRoom(),
+    place: 'lan', // what the person chose: 'lan' | 'plaza' | 'room' (internet version)
+    room: '', // the room code while the place is 'room'
     maxFile: 0, // bytes per file; 0 = no limit (the server says in its welcome)
-    plaza: readPlaza(), // the person chose the plaza (internet version, outside rooms)
     inPlaza: false, // the server put us in the plaza (its welcome says so)
   };
 
-  function readRoom() {
+  function urlRoom() {
     const r = (new URLSearchParams(location.search).get('room') || '').toUpperCase();
     return ROOM_RE.test(r) ? r : '';
   }
-  // Default: public on the LAN; the plaza only when the person chose it.
-  function readPlaza() {
-    try { return localStorage.getItem(PLACE_KEY) === 'plaza'; } catch { return false; }
+  function lastRoom() {
+    let r = '';
+    try { r = localStorage.getItem(ROOM_KEY) || ''; } catch {}
+    return ROOM_RE.test(r) ? r : '';
+  }
+  // A room link starts in that room; otherwise the place chosen last time (default: public on the LAN).
+  function readPlace() {
+    const r = urlRoom();
+    if (r) return { place: 'room', room: r };
+    let p = '';
+    try { p = localStorage.getItem(PLACE_KEY) || ''; } catch {}
+    if (p === 'room') return { place: 'room', room: lastRoom() || newRoomCode() };
+    return { place: p === 'plaza' ? 'plaza' : 'lan', room: '' };
+  }
+  // Remember the choice, and keep the room in the address bar so the link can be copied from there.
+  function savePlace() {
+    try {
+      localStorage.setItem(PLACE_KEY, state.place);
+      if (state.room) localStorage.setItem(ROOM_KEY, state.room);
+    } catch {}
+    const url = new URL(location.href);
+    if (state.room) url.searchParams.set('room', state.room); else url.searchParams.delete('room');
+    history.replaceState(null, '', url);
   }
 
   // ---------- helpers ----------
@@ -77,7 +98,7 @@
   function connect() {
     setStatus('connecting');
     const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const query = state.room ? '?room=' + state.room : state.plaza ? '?plaza=1' : '';
+    const query = state.room ? '?room=' + state.room : state.place === 'plaza' ? '?plaza=1' : '';
     const ws = new WebSocket(`${proto}//${location.host}/ws${query}`);
     ws.binaryType = 'arraybuffer';
     state.ws = ws;
@@ -168,20 +189,35 @@
     updateSend();
   }
 
-  // ---------- who can see me: public on the LAN / plaza / offline ----------
-  // The plaza exists only on the internet version, and not while in a room.
+  // ---------- who can see me: public on the LAN / plaza / room / offline ----------
+  // The plaza and rooms exist only on the internet version; the LAN version shows online / offline.
   function renderMode() {
-    const plazaWorks = state.net && !state.room;
-    el.modePlazaOpt.hidden = !state.net;
-    el.modePlazaOpt.querySelector('input').disabled = !plazaWorks;
+    for (const o of document.querySelectorAll('.seg .net-only')) o.hidden = !state.net;
     el.modeLan.textContent = t(state.net ? 'mode.public' : 'mode.online');
-    const mode = !state.wantOnline ? 'offline' : state.plaza && plazaWorks ? 'plaza' : 'lan';
+    const mode = !state.wantOnline ? 'offline' : state.net ? state.place : 'lan';
     for (const r of document.querySelectorAll('input[name="mode"]')) r.checked = r.value === mode;
     el.modeHint.textContent = t(
       mode === 'offline' ? 'mode.offlineHint'
         : !state.net ? 'mode.lanHint'
-          : state.room ? 'mode.roomHint'
+          : mode === 'room' ? 'mode.roomHint'
             : mode === 'plaza' ? 'mode.plazaHint' : 'net.visibleHint', { max: fmtMax() });
+  }
+
+  // Go to a place (and room); reconnects to that group when it changed or the page was offline.
+  function setPlace(place, room = '') {
+    const wasRoom = state.room;
+    room = place === 'room' ? room : '';
+    const changed = place !== state.place || room !== state.room;
+    state.place = place;
+    state.room = room;
+    savePlace();
+    renderNet();
+    if (changed || !state.wantOnline) {
+      state.wantOnline = true;
+      reconnect();
+    }
+    if (room && room !== wasRoom) toast(t('room.joined', { code: room }));
+    else if (!room && wasRoom) toast(t('room.left'));
   }
 
   for (const r of document.querySelectorAll('input[name="mode"]')) {
@@ -189,21 +225,13 @@
       if (!r.checked) return;
       if (r.value === 'offline') {
         state.wantOnline = false;
+        renderNet();
         if (state.ws) state.ws.close();
         else setStatus('offline');
         return;
       }
-      const plaza = r.value === 'plaza';
-      const changed = plaza !== state.plaza;
-      state.plaza = plaza;
-      try { localStorage.setItem(PLACE_KEY, plaza ? 'plaza' : 'lan'); } catch {}
-      if (!state.wantOnline) {
-        state.wantOnline = true;
-        connect();
-      } else if (changed && !state.room) {
-        reconnect();
-      }
-      renderMode();
+      // 房间: back to the room you were in last, or a new one.
+      setPlace(r.value, r.value === 'room' ? state.room || lastRoom() || newRoomCode() : '');
     });
   }
 
@@ -439,11 +467,10 @@
   }
 
   function renderNet() {
-    el.netCard.hidden = !state.net;
-    // In a room, the room card and everything below it change colour, so it is clear where you are.
-    document.body.classList.toggle('in-room', !!state.room);
-    el.netIp.hidden = !!state.room;
-    el.netRoom.hidden = !state.room;
+    const inRoom = !!state.room && state.wantOnline;
+    // In a room the page changes colour, so it is clear where you are.
+    document.body.classList.toggle('in-room', inRoom);
+    el.netRoom.hidden = !(inRoom && state.net);
     renderMode();
     el.roomCode.textContent = state.room;
     // What to open on the other device.
@@ -464,32 +491,18 @@
     }
   }
 
-  function setRoom(code) {
-    state.room = code;
-    const url = new URL(location.href);
-    if (code) url.searchParams.set('room', code); else url.searchParams.delete('room');
-    history.replaceState(null, '', url);
-    renderNet();
-    reconnect();
-  }
-
   function newRoomCode() {
     const abc = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; // no 0/O, 1/I/L
     return [...crypto.getRandomValues(new Uint8Array(6))].map((b) => abc[b % abc.length]).join('');
   }
 
-  el.createRoom.addEventListener('click', () => {
-    const code = newRoomCode();
-    setRoom(code);
-    toast(t('room.joined', { code }));
-  });
+  el.createRoom.addEventListener('click', () => setPlace('room', newRoomCode()));
   el.joinRoom.addEventListener('click', () => {
     const input = prompt(t('room.joinPrompt'), '');
     if (input === null) return;
     const code = input.replace(/\s/g, '').toUpperCase();
     if (!ROOM_RE.test(code)) { toast(t('room.bad')); return; }
-    setRoom(code);
-    toast(t('room.joined', { code }));
+    setPlace('room', code);
   });
   el.copyRoom.addEventListener('click', async () => {
     try {
@@ -523,11 +536,6 @@
   // A tap outside the box closes it too.
   el.qrDialog.addEventListener('click', (e) => { if (e.target === el.qrDialog) el.qrDialog.close(); });
 
-  el.leaveRoom.addEventListener('click', () => {
-    setRoom('');
-    toast(t('room.left'));
-  });
-
   // ---------- language ----------
   el.langSelect.innerHTML = Object.entries(I18n.LANGS).map(([k, v]) => `<option value="${k}">${v}</option>`).join('');
   el.langSelect.value = I18n.lang;
@@ -549,6 +557,8 @@
     peerName: (id, fallback) => (state.peers.get(id) || {}).name || fallback || t('leftDevice'),
   };
 
+  Object.assign(state, readPlace());
+  if (state.room) savePlace();
   I18n.apply();
   renderNet();
   renderMe();
