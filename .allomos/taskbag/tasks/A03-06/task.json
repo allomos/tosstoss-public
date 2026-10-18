@@ -2,6 +2,9 @@
   "area": "A03",
   "holder": "room-tab",
   "id": "A03-06",
-  "state": "in_progress",
-  "title": "选“下线”后页面只显示“已下线”的提示，下面的卡片都隐藏"
+  "label": "locally verified",
+  "state": "waiting",
+  "title": "选“下线”后页面只显示“已下线”的提示，下面的卡片都隐藏",
+  "waiting_on": "合并到 main 并部署（两个 Cloudflare 部署）的同意",
+  "who": "使用者"
 }

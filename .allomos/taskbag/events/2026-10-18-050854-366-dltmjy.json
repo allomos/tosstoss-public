@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-18T05:08:54Z",
+  "by": "room-tab",
+  "via": "alm",
+  "command": "wait",
+  "kind": "task",
+  "id": "A03-06",
+  "changes": [
+    {
+      "field": "state",
+      "from": "in_progress",
+      "to": "waiting"
+    },
+    {
+      "field": "waiting_on",
+      "to": "合并到 main 并部署（两个 Cloudflare 部署）的同意"
+    },
+    {
+      "field": "who",
+      "to": "使用者"
+    }
+  ]
+}

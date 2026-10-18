@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-18T05:08:54Z",
+  "by": "room-tab",
+  "via": "alm",
+  "command": "label",
+  "kind": "task",
+  "id": "A03-06",
+  "changes": [
+    {
+      "field": "label",
+      "to": "locally verified"
+    }
+  ]
+}

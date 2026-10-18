@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-18T05:08:54Z",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A03-06",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "下线时在“我的设备”卡片下方显示居中的小胶囊“你现在已下线”（四种语言）；用 body.is-offline 和 CSS 隐藏下面的卡片，不从页面移除，所以传输记录保留"
+    }
+  ]
+}
