@@ -1,7 +1,9 @@
 {
   "area": "A02",
+  "handoff_note": "本地用替身 API 验证：订阅为空→照常；含 Workers Paid→暂停；只有域名订阅→照常；接口 500→暂停；没有令牌→暂停；3 次连接只查 1 轮。未验证：真实令牌能否列出 /accounts（部署后看页面是否照常）。",
   "holder": "claude-paused",
   "id": "A02-08",
+  "label": "locally verified",
   "state": "in_progress",
   "title": "账号变成付费套餐时，公网版自动显示“投桃暂停服务”"
 }

@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-18T05:32:31Z",
+  "via": "alm",
+  "command": "ai-decided",
+  "kind": "task",
+  "id": "A02-08",
+  "changes": [
+    {
+      "field": "ai_decision",
+      "to": "账号 ID 不写进公开仓库：Worker 用令牌查 /accounts 取得（令牌只对应一个账号），也可用 CF_ACCOUNT_ID 变量指定；判定规则：订阅里含 worker 字样即付费；查询失败 1 分钟后重试，成功则缓存 10 分钟；本地 dev 脚本加 --var BILLING_CHECK:0。"
+    }
+  ]
+}
