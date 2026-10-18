@@ -12,7 +12,10 @@
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Hub"] }],
   "observability": { "enabled": true },
   // Largest file per transfer, in bytes; 0 means no limit.
-  "vars": { "MAX_FILE_BYTES": "20971520" },
+  // PAUSED "1": every page shows 投桃暂停服务 and nothing reaches a Durable Object (README: 暂停服务).
+  // BILLING_CHECK "1": the same pause when the account is on a paid plan, or its plan cannot be
+  // read with the CF_BILLING_TOKEN secret; local dev turns it off (package.json).
+  "vars": { "MAX_FILE_BYTES": "20971520", "PAUSED": "0", "BILLING_CHECK": "1" },
   "env": {
     "unlimited": {
       // Placeholder: the real, hard-to-guess name is kept out of Git (.unlimited-name, or the
@@ -21,7 +24,7 @@
       // run by hand fails instead of publishing under a guessable name.
       "name": "__UNLIMITED_WORKER_NAME__",
       "durable_objects": { "bindings": [{ "name": "HUB", "class_name": "Hub" }] },
-      "vars": { "MAX_FILE_BYTES": "0" },
+      "vars": { "MAX_FILE_BYTES": "0", "PAUSED": "0", "BILLING_CHECK": "1" },
       // Names over 54 characters cannot have preview URLs; this one does not need them.
       "preview_urls": false
     }

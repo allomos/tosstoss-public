@@ -8,6 +8,7 @@ What every session must know, whatever its task. Keep it short, and change lines
   - `tosstoss` → https://tosstoss.mypals.workers.dev — files relayed by the server at most 20 MB each (MAX_FILE_BYTES, enforced by the server); direct (WebRTC) transfers have no limit (the person's decision, 2026-10-18). Public; meant to be shared. Deploy: `npm run deploy`.
   - env `unlimited` → https://<real name>.mypals.workers.dev — no size limit. Private: kept safe only by its hard-to-guess name; do not share it. The real name is never in Git: it lives in `.unlimited-name` (git-ignored; on this Mac only in the private checkout ../tosstoss, not in this one: deploy with `TOSSTOSS_UNLIMITED_NAME=$(cat ../tosstoss/.unlimited-name) npm run deploy:unlimited`, never echo it) or TOSSTOSS_UNLIMITED_NAME; wrangler.jsonc holds the placeholder `__UNLIMITED_WORKER_NAME__`. Deploy: `npm run deploy:unlimited` (scripts/unlimited.js). Renamed 2026-10-18 before open-sourcing; the old Worker (its name is still in Git history) was deleted from Cloudflare the same day.
   - Deploy both after every change. Both share the account's free daily quota.
+  - Emergency stop (the person's request, 2026-10-18, against runaway Durable Object costs): `"PAUSED": "1"` in a deployment's `vars` in wrangler.jsonc, then deploy it; every page shows 投桃暂停服务 and no Durable Object wakes. Both deployments run unpaused. How-to for people: README, 暂停服务. On 2026-10-18 the account had no subscriptions (Workers Free). With `"BILLING_CHECK": "1"` (both deployments) the Worker reads the account's subscriptions every 10 minutes with the secret CF_BILLING_TOKEN (billing read only; set on both Workers 2026-10-18) and pauses when one mentions workers, or when the plan cannot be read (the person's decision, 2026-10-18). If the site suddenly shows 投桃暂停服务, check the token first (expired, rolled, deleted); the Worker logs "tosstoss: billing plan unknown" or "paid plan".
   - The unlimited name is 57 characters (`node scripts/unlimited.js new-name`): over Cloudflare's 54 for preview URLs, so that env sets `preview_urls: false`.
 - Nothing runs locally. To try the app: `npm install && npm start` (port 8080, prints the LAN URL); the preview config is `.claude/launch.json` ("tosstoss"). Restart the server after changing server.js.
 
@@ -22,7 +23,7 @@ What every session must know, whatever its task. Keep it short, and change lines
 
 ## Where credentials live
 
-Never their values. Cloudflare: wrangler's OAuth login on this Mac (`npx wrangler whoami`); nothing in the repo.
+Never their values. Cloudflare: wrangler's OAuth login on this Mac (`npx wrangler whoami`); nothing in the repo. CF_BILLING_TOKEN: a Cloudflare API token (Account → Billing → Read, named tosstoss-billing-read) stored only as a secret on both Workers (`npx wrangler secret list --env=""`); the person keeps it in the dashboard (My Profile → API Tokens).
 
 ## Agents set up
 

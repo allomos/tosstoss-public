@@ -56,6 +56,28 @@ node scripts/unlimited.js new-name > .unlimited-name
 - **房间**：选“房间”就回到上次的房间（没有就新建一个），下面显示房间码、复制链接、显示二维码、加入其他房间、重建房间（换一个新房间码，旧房间里的设备不再看到你）。打开链接或输入房间码的设备在同一房间里互相可见，不论在哪个网络（手机流量也行）；打开房间链接会直接进入“房间”。切到别的选项就离开房间。
 - 文件经 Cloudflare 中转，不落盘。
 
+### 暂停服务
+
+防止 Cloudflare 费用失控用的手动开关。打开后，所有打开投桃的页面整页显示“投桃暂停服务”，不再重连；服务器在入口直接回答，不叫醒任何 Durable Object，所以暂停期间几乎不产生费用。局域网版（`npm start`）没有这个开关。
+
+- **暂停**：把 `wrangler.jsonc` 里的 `"PAUSED"` 改成 `"1"`，再部署：`npm run deploy`（公开版）、`npm run deploy:unlimited`（不限大小版）。两个版本各有一份 `vars`，要暂停哪个就改哪个；几秒后生效，已打开的页面也会在下次连接时变成暂停页。
+- **恢复**：改回 `"0"`，再部署一次。用户刷新页面即可。
+- **手边没有电脑**：在 Cloudflare 后台 Workers & Pages → 对应的 Worker → Settings → Variables 里把 `PAUSED` 改成 `1`，保存后立即生效。但下次从电脑部署时会被 `wrangler.jsonc` 里的值覆盖回去，事后记得把文件也改成一致。
+
+**付费套餐自动暂停**：Cloudflare 免费套餐超出每日额度只会报错，付费套餐却会一直计费、没有上限。所以公网版每 10 分钟查一次账号的订阅：出现和 Workers 有关的订阅（付费套餐），或者**查不到**（没有令牌、令牌失效、接口出错），都自动显示“投桃暂停服务”。查询用一个只能读账单的令牌，存成两个 Worker 的密钥 `CF_BILLING_TOKEN`：
+
+1. Cloudflare 后台右上角头像 → My Profile → API Tokens → Create Token → Create Custom Token：权限只加 `Account` → `Billing` → `Read`，Account Resources 选自己的账号；创建后复制令牌（只显示一次）。
+2. 在项目文件夹里存进两个 Worker（会提示粘贴，屏幕上不显示）：
+
+   ```bash
+   npx wrangler secret put CF_BILLING_TOKEN --env=""
+   npx wrangler secret put CF_BILLING_TOKEN --env="" --name "<不限大小版的真实名字>"
+   ```
+
+3. 换令牌（Roll）或令牌过期后，重新执行第 2 步，否则投桃会因为“查不到”而暂停。
+
+不想要自动检查（比如在自己的付费账号上部署）：把 `wrangler.jsonc` 里的 `"BILLING_CHECK"` 改成 `"0"` 再部署。本地 `npm run dev:cf` 不做这项检查。
+
 本地试公网版：`npm run dev:cf`（20 MB 限制）或 `npm run dev:cf:unlimited`（http://127.0.0.1:8787），再用 `npm run test:cf` 对它跑全部测试。
 
 ## 语言

@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-18T05:32:35Z",
+  "by": "claude-paused",
+  "via": "alm",
+  "command": "note",
+  "kind": "task",
+  "id": "A02-08",
+  "changes": [
+    {
+      "field": "handoff_note",
+      "to": "本地用替身 API 验证：订阅为空→照常；含 Workers Paid→暂停；只有域名订阅→照常；接口 500→暂停；没有令牌→暂停；3 次连接只查 1 轮。未验证：真实令牌能否列出 /accounts（部署后看页面是否照常）。"
+    }
+  ]
+}

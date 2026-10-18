@@ -2,6 +2,7 @@
   "area": "A02",
   "holder": "claude-paused",
   "id": "A02-07",
+  "label": "locally verified",
   "state": "in_progress",
   "title": "公网版有手动暂停开关：打开后所有页面显示“投桃暂停服务”"
 }
