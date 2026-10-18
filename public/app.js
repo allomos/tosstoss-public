@@ -195,6 +195,8 @@
     for (const o of document.querySelectorAll('.seg .net-only')) o.hidden = !state.net;
     el.modeLan.textContent = t(state.net ? 'mode.public' : 'mode.online');
     const mode = !state.wantOnline ? 'offline' : state.net ? state.place : 'lan';
+    // Offline: only the top bar, this card and a short note; the cards below are hidden, not removed.
+    document.body.classList.toggle('is-offline', mode === 'offline');
     for (const r of document.querySelectorAll('input[name="mode"]')) r.checked = r.value === mode;
     el.modeHint.textContent = t(
       mode === 'offline' ? 'mode.offlineHint'
