@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-18T09:18:07Z",
+  "by": "claude-paused",
+  "via": "alm",
+  "command": "note",
+  "kind": "task",
+  "id": "A02-07",
+  "changes": [
+    {
+      "field": "handoff_note",
+      "to": "2026-10-18 已合并进 main（6600a4b）并部署两个版本；部署后两个线上网址连接都回 welcome（未暂停），说明真实令牌查得到账号且订阅里没有 Workers 付费订阅。"
+    }
+  ]
+}

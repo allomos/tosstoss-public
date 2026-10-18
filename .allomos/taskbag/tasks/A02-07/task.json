@@ -1,8 +1,10 @@
 {
   "area": "A02",
+  "handoff_note": "2026-10-18 已合并进 main（6600a4b）并部署两个版本；部署后两个线上网址连接都回 welcome（未暂停），说明真实令牌查得到账号且订阅里没有 Workers 付费订阅。",
   "holder": "claude-paused",
   "id": "A02-07",
   "label": "locally verified",
-  "state": "in_progress",
-  "title": "公网版有手动暂停开关：打开后所有页面显示“投桃暂停服务”"
+  "state": "waiting",
+  "title": "公网版有手动暂停开关：打开后所有页面显示“投桃暂停服务”",
+  "waiting_on": "试一次暂停：后台 Workers & Pages → tosstoss → Settings → Variables 把 PAUSED 改成 1，打开 https://tosstoss.mypals.workers.dev 应整页显示“投桃暂停服务”；改回 0 后刷新恢复（README：暂停服务）"
 }

@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-18T09:18:07Z",
+  "by": "claude-paused",
+  "via": "alm",
+  "command": "wait",
+  "kind": "task",
+  "id": "A02-08",
+  "changes": [
+    {
+      "field": "state",
+      "from": "in_progress",
+      "to": "waiting"
+    },
+    {
+      "field": "waiting_on",
+      "to": "确认线上照常（未暂停）；可选：在 API Tokens 里暂时删掉或 Roll 令牌而不更新 Worker 密钥，约 10 分钟内网页应显示“投桃暂停服务”，再把新令牌存回两个 Worker 后恢复"
+    }
+  ]
+}
