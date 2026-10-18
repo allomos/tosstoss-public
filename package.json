@@ -7,11 +7,11 @@
   "scripts": {
     "start": "node server.js",
     "test": "node --test test/*.test.js",
-    "dev:cf": "wrangler dev --env=\"\"",
+    "dev:cf": "wrangler dev --env=\"\" --var BILLING_CHECK:0",
     "deploy": "wrangler deploy --env=\"\"",
     "test:cf": "TOSSTOSS_URL=http://127.0.0.1:8787 node --test test/*.test.js",
     "deploy:unlimited": "node scripts/unlimited.js deploy",
-    "dev:cf:unlimited": "node scripts/unlimited.js dev"
+    "dev:cf:unlimited": "node scripts/unlimited.js dev --var BILLING_CHECK:0"
   },
   "engines": {
     "node": ">=18"

@@ -24,6 +24,7 @@ export default {
     // PAUSED "1" (wrangler.jsonc, or the dashboard's variables): every page shows 投桃暂停服务.
     // Answered here, so no Durable Object wakes up and the pause costs next to nothing.
     if (env.PAUSED === '1') return paused();
+    if (env.BILLING_CHECK !== '0' && (await onPaidPlan(env))) return paused();
     const room = (url.searchParams.get('room') || '').toUpperCase();
     const headers = { ...Object.fromEntries(request.headers), 'X-Tosstoss-Room': ROOM_RE.test(room) ? room : '' };
     if (!ROOM_RE.test(room) && url.searchParams.get('plaza') === '1') {
@@ -40,6 +41,46 @@ export default {
     return hub.fetch(request, { headers });
   },
 };
+
+// Pause on a paid plan: the free plan stops at its daily limits, a paid one keeps charging.
+// Asks Cloudflare at most every 10 minutes (per Worker instance) with CF_BILLING_TOKEN, a token
+// that may only read billing (README: 暂停服务). The person's decision (2026-10-18): when the
+// plan cannot be known (no token, a bad token, an API error), pause too.
+const CF_API = 'https://api.cloudflare.com/client/v4';
+const PLAN_TTL = 10 * 60 * 1000;
+const PLAN_RETRY = 60 * 1000; // after a failed check, try again sooner
+let plan = null; // { paid: boolean, until: number }
+
+async function onPaidPlan(env) {
+  if (plan && Date.now() < plan.until) return plan.paid;
+  let paid = true;
+  let ok = false;
+  try {
+    const api = env.CF_API || CF_API; // tests point this at a stand-in
+    const headers = { Authorization: `Bearer ${env.CF_BILLING_TOKEN || ''}` };
+    if (env.CF_BILLING_TOKEN) {
+      let account = env.CF_ACCOUNT_ID;
+      if (!account) {
+        // The token is made for one account, so it sees just that one.
+        const a = await (await fetch(`${api}/accounts`, { headers })).json();
+        account = a && a.success && a.result && a.result[0] && a.result[0].id;
+      }
+      if (account) {
+        const s = await (await fetch(`${api}/accounts/${account}/subscriptions`, { headers })).json();
+        if (s && s.success && Array.isArray(s.result)) {
+          // What a Workers Paid subscription looks like was never seen (the account had none):
+          // any subscription that mentions workers counts as paid.
+          paid = s.result.some((x) => /worker/i.test(JSON.stringify(x)));
+          ok = true;
+        }
+      }
+    }
+  } catch {}
+  if (!ok) console.warn('tosstoss: billing plan unknown, pausing');
+  else if (paid) console.warn('tosstoss: paid plan, pausing');
+  plan = { paid, until: Date.now() + (ok ? PLAN_TTL : PLAN_RETRY) };
+  return paid;
+}
 
 // A socket that only says "paused" and closes; the page then stops reconnecting.
 function paused() {

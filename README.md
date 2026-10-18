@@ -64,6 +64,20 @@ node scripts/unlimited.js new-name > .unlimited-name
 - **恢复**：改回 `"0"`，再部署一次。用户刷新页面即可。
 - **手边没有电脑**：在 Cloudflare 后台 Workers & Pages → 对应的 Worker → Settings → Variables 里把 `PAUSED` 改成 `1`，保存后立即生效。但下次从电脑部署时会被 `wrangler.jsonc` 里的值覆盖回去，事后记得把文件也改成一致。
 
+**付费套餐自动暂停**：Cloudflare 免费套餐超出每日额度只会报错，付费套餐却会一直计费、没有上限。所以公网版每 10 分钟查一次账号的订阅：出现和 Workers 有关的订阅（付费套餐），或者**查不到**（没有令牌、令牌失效、接口出错），都自动显示“投桃暂停服务”。查询用一个只能读账单的令牌，存成两个 Worker 的密钥 `CF_BILLING_TOKEN`：
+
+1. Cloudflare 后台右上角头像 → My Profile → API Tokens → Create Token → Create Custom Token：权限只加 `Account` → `Billing` → `Read`，Account Resources 选自己的账号；创建后复制令牌（只显示一次）。
+2. 在项目文件夹里存进两个 Worker（会提示粘贴，屏幕上不显示）：
+
+   ```bash
+   npx wrangler secret put CF_BILLING_TOKEN --env=""
+   npx wrangler secret put CF_BILLING_TOKEN --env="" --name "<不限大小版的真实名字>"
+   ```
+
+3. 换令牌（Roll）或令牌过期后，重新执行第 2 步，否则投桃会因为“查不到”而暂停。
+
+不想要自动检查（比如在自己的付费账号上部署）：把 `wrangler.jsonc` 里的 `"BILLING_CHECK"` 改成 `"0"` 再部署。本地 `npm run dev:cf` 不做这项检查。
+
 本地试公网版：`npm run dev:cf`（20 MB 限制）或 `npm run dev:cf:unlimited`（http://127.0.0.1:8787），再用 `npm run test:cf` 对它跑全部测试。
 
 ## 语言
