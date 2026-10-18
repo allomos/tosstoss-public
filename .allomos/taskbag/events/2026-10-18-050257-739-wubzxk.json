@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-18T05:02:57Z",
+  "by": "room-tab",
+  "via": "alm",
+  "command": "claim",
+  "kind": "task",
+  "id": "A03-05",
+  "changes": [
+    {
+      "field": "state",
+      "from": "ready",
+      "to": "in_progress"
+    },
+    {
+      "field": "holder",
+      "to": "room-tab"
+    },
+    {
+      "field": "working_branch",
+      "to": "claude/room-tab-6827e1"
+    }
+  ]
+}

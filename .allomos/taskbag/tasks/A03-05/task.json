@@ -1,6 +1,7 @@
 {
   "area": "A03",
+  "holder": "room-tab",
   "id": "A03-05",
-  "state": "ready",
+  "state": "in_progress",
   "title": "顶部标签栏有“局域网公开 / 广场 / 房间 / 下线”四个选项，选“房间”即进入房间"
 }
