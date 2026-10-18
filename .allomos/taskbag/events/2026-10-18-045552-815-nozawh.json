@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-18T04:55:52Z",
+  "by": "claude-plaza",
+  "via": "alm",
+  "command": "wait",
+  "kind": "task",
+  "id": "A02-06",
+  "changes": [
+    {
+      "field": "waiting_on",
+      "from": "合并到 main 并部署两个公网版本（npm run deploy、npm run deploy:unlimited），然后在两台不同网络的真实设备上都选“广场”，互发文件试“接收/拒绝”",
+      "to": "已部署两个公网版本（2026-10-18）。请在两台不同网络的真实设备上打开 https://tosstoss.mypals.workers.dev 都选“广场”，互发文件试“接收/拒绝”；确认默认是“局域网内公开”、没有“隐身”"
+    }
+  ]
+}
