@@ -111,6 +111,7 @@ main {
 .status { font-size: 13px; padding: 3px 10px; border-radius: 12px; white-space: nowrap; flex-shrink: 0; }
 .status::before { content: "●"; margin-right: 4px; }
 .status.online { color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, transparent); }
+/* Connecting reads 在线 too (the person asked for it, 2026-10-18); only the amber dot tells it apart. */
 .status.connecting { color: var(--warn); background: color-mix(in srgb, var(--warn) 14%, transparent); }
 .status.offline { color: var(--muted); background: var(--line); }
 

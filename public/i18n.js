@@ -8,7 +8,7 @@
     zh: {
       brand: '投桃',
       tagline: '打开网页，互传文件',
-      'status.online': '在线', 'status.connecting': '连接中', 'status.offline': '已下线',
+      'status.online': '在线', 'status.connecting': '在线', 'status.offline': '已下线',
       'me.label': '我的设备', rename: '改名',
       'rename.prompt': '给这台设备起个名字（别人会看到）',
       'toast.renamed': '已改名为 {name}',
@@ -69,7 +69,7 @@
     en: {
       brand: 'Tosstoss',
       tagline: 'Open the page, share files',
-      'status.online': 'Online', 'status.connecting': 'Connecting', 'status.offline': 'Offline',
+      'status.online': 'Online', 'status.connecting': 'Online', 'status.offline': 'Offline',
       'me.label': 'My device', rename: 'Rename',
       'rename.prompt': 'Name this device (others will see it)',
       'toast.renamed': 'Renamed to {name}',
@@ -130,7 +130,7 @@
     ja: {
       brand: '投桃',
       tagline: 'ページを開いてファイルを送り合う',
-      'status.online': 'オンライン', 'status.connecting': '接続中', 'status.offline': 'オフライン',
+      'status.online': 'オンライン', 'status.connecting': 'オンライン', 'status.offline': 'オフライン',
       'me.label': 'この端末', rename: '名前を変更',
       'rename.prompt': 'この端末の名前（相手に表示されます）',
       'toast.renamed': '名前を「{name}」に変更しました',
@@ -191,7 +191,7 @@
     es: {
       brand: 'Tosstoss',
       tagline: 'Abre la página y comparte archivos',
-      'status.online': 'En línea', 'status.connecting': 'Conectando', 'status.offline': 'Desconectado',
+      'status.online': 'En línea', 'status.connecting': 'En línea', 'status.offline': 'Desconectado',
       'me.label': 'Mi dispositivo', rename: 'Cambiar nombre',
       'rename.prompt': 'Ponle nombre a este dispositivo (otros lo verán)',
       'toast.renamed': 'Nombre cambiado a {name}',
