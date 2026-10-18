@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-18T23:45:45Z",
+  "by": "claude-plaza",
+  "via": "alm",
+  "command": "wait",
+  "kind": "task",
+  "id": "A03-07",
+  "changes": [
+    {
+      "field": "state",
+      "from": "in_progress",
+      "to": "waiting"
+    },
+    {
+      "field": "waiting_on",
+      "to": "已正式发布两个公网版本（2026-10-19）。请在 https://tosstoss.mypals.workers.dev 依次点“局域网公开 / 广场 / 房间 / 下线”，看整页颜色是否分得清、文字是否清楚；手机和深色模式各看一次"
+    },
+    {
+      "field": "who",
+      "to": "使用者"
+    }
+  ]
+}

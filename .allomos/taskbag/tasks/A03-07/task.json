@@ -3,6 +3,8 @@
   "holder": "claude-plaza",
   "id": "A03-07",
   "label": "locally verified",
-  "state": "in_progress",
-  "title": "四个标签各有自己的色系：局域网公开、广场、房间、下线一眼就能分清"
+  "state": "waiting",
+  "title": "四个标签各有自己的色系：局域网公开、广场、房间、下线一眼就能分清",
+  "waiting_on": "已正式发布两个公网版本（2026-10-19）。请在 https://tosstoss.mypals.workers.dev 依次点“局域网公开 / 广场 / 房间 / 下线”，看整页颜色是否分得清、文字是否清楚；手机和深色模式各看一次",
+  "who": "使用者"
 }
