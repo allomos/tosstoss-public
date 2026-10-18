@@ -47,7 +47,7 @@
       'mode.lanHint': '同一局域网的设备都能看到你并给你发文件。',
       'mode.roomHint': '在房间里：打开这个链接或输入这个房间码的设备都能看到你、给你发文件，不论在哪个网络。',
       'net.visibleHint': '局域网公开：和你使用同一网络（同一公网 IP，通常是同一 Wi-Fi）的设备都能看到你并给你发文件。',
-      'room.new': '新房间', 'room.joinOther': '加入其他房间', 'room.joinPrompt': '输入房间码',
+      'room.new': '重建房间', 'room.joinOther': '加入其他房间', 'room.joinPrompt': '输入房间码',
       'room.bad': '房间码是 4–12 位字母或数字', 'room.label': '房间',
       'room.qr': '显示二维码', 'room.qrTitle': '用手机扫码加入房间', close: '关闭', 'room.copy': '复制链接', 'room.copied': '链接已复制',
       'room.joined': '已进入房间 {code}', 'room.left': '已离开房间',
