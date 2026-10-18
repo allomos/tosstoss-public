@@ -204,6 +204,10 @@
     const mode = !state.wantOnline ? 'offline' : state.net ? state.place : 'lan';
     // Offline: only the top bar, this card and a short note; the cards below are hidden, not removed.
     document.body.classList.toggle('is-offline', mode === 'offline');
+    // Each tab has its own palette (style.css); the browser bar follows it.
+    document.body.dataset.mode = mode;
+    const theme = document.querySelector('meta[name="theme-color"]');
+    if (theme) theme.content = getComputedStyle(document.body).getPropertyValue('--accent').trim() || theme.content;
     for (const r of document.querySelectorAll('input[name="mode"]')) r.checked = r.value === mode;
     // Offline: the note below this card says it all, so the hint line stays empty.
     el.modeHint.hidden = mode === 'offline';
@@ -478,8 +482,6 @@
 
   function renderNet() {
     const inRoom = !!state.room && state.wantOnline;
-    // In a room the page changes colour, so it is clear where you are.
-    document.body.classList.toggle('in-room', inRoom);
     el.netRoom.hidden = !(inRoom && state.net);
     renderMode();
     el.roomCode.textContent = state.room;

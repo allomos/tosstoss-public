@@ -2,11 +2,12 @@
   --bg: #fdf6f2;
   --surface: #ffffff;
   --text: #2d2320;
-  --muted: #7c6a64;
+  --muted: #76645e;
   --line: #f0e2dc;
-  --accent: #ee6f5c;
-  --accent-strong: #d9533f;
+  --accent: #c94a37;
+  --accent-strong: #b23e2c;
   --accent-soft: #fde5df;
+  --on-accent: #ffffff; /* text on --accent */
   --ok: #2f9e5b;
   --warn: #c98a12;
   --info: #2f6db5;
@@ -25,6 +26,7 @@
     --accent: #f58a78;
     --accent-strong: #ff9c8a;
     --accent-soft: #3d2924;
+    --on-accent: #2a1310;
     --ok: #4cc27c;
     --warn: #e0a83a;
     --info: #6aa6e8;
@@ -58,7 +60,7 @@ button, input { font: inherit; color: inherit; }
 }
 .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .brand h1 { margin: 0; font-size: 20px; line-height: 1.2; }
-.brand h1 span { color: var(--accent); font-weight: 600; }
+.brand h1 span { color: var(--accent-strong); font-weight: 600; }
 .tagline { margin: 0; font-size: 12px; color: var(--muted); }
 
 main {
@@ -87,11 +89,13 @@ main {
   border: 0; border-radius: 12px; padding: 10px 16px; min-height: 44px;
   cursor: pointer; font-weight: 600; touch-action: manipulation;
 }
-.btn.primary { background: var(--accent); color: #fff; }
+.btn.primary { background: var(--accent); color: var(--on-accent); }
 .btn.primary:hover:not(:disabled) { background: var(--accent-strong); }
 .btn.ghost { background: transparent; border: 1.5px solid var(--line); color: var(--text); flex-shrink: 0; }
-.btn.ghost.offline { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.ghost.offline { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .btn:disabled { opacity: .45; cursor: not-allowed; }
+/* A disabled send button stays readable: a soft fill and muted text instead of fading it out. */
+.btn.primary:disabled { opacity: 1; background: var(--accent-soft); color: var(--muted); }
 .btn.wide { width: 100%; margin-top: 12px; }
 .link {
   background: none; border: 0; color: var(--accent-strong); cursor: pointer;
@@ -110,10 +114,10 @@ main {
 .rename:hover { color: var(--accent-strong); background: var(--accent-soft); }
 .status { font-size: 13px; padding: 3px 10px; border-radius: 12px; white-space: nowrap; flex-shrink: 0; }
 .status::before { content: "●"; margin-right: 4px; }
-.status.online { color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, transparent); }
+.status.online { color: color-mix(in srgb, var(--ok) 60%, var(--text)); background: color-mix(in srgb, var(--ok) 12%, transparent); }
 /* Connecting reads 在线 too (the person asked for it, 2026-10-18); only the amber dot tells it apart. */
-.status.connecting { color: var(--warn); background: color-mix(in srgb, var(--warn) 14%, transparent); }
-.status.offline { color: var(--muted); background: var(--line); }
+.status.connecting { color: color-mix(in srgb, var(--warn) 60%, var(--text)); background: color-mix(in srgb, var(--warn) 14%, transparent); }
+.status.offline { color: color-mix(in srgb, var(--muted) 70%, var(--text)); background: var(--line); }
 
 .dev-icon {
   width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
@@ -155,7 +159,7 @@ main {
   border: 2px solid var(--line); display: grid; place-items: center; color: transparent; font-size: 14px;
 }
 .peer input:checked + label { border-color: var(--accent); background: var(--accent-soft); }
-.peer input:checked + label .tick { background: var(--accent); border-color: var(--accent); color: #fff; }
+.peer input:checked + label .tick { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .peer input:focus-visible + label { outline: 2px solid var(--accent); outline-offset: 2px; }
 .empty { color: var(--muted); font-size: 14px; text-align: center; padding: 8px 0; }
 .empty p { margin: 4px 0; }
@@ -169,7 +173,7 @@ main {
   transition: background .15s, border-color .15s;
 }
 .drop:hover, .drop.over, .drop:focus-visible { background: var(--accent-soft); border-color: var(--accent); outline: none; }
-.drop-icon { font-size: 30px; color: var(--accent); line-height: 1; }
+.drop-icon { font-size: 30px; color: var(--accent-strong); line-height: 1; }
 .drop-main { font-weight: 600; }
 .on-touch { display: none; }
 @media (hover: none) and (pointer: coarse) {
@@ -201,7 +205,7 @@ main {
 .icon-btn:hover { background: var(--accent-soft); color: var(--accent-strong); }
 .save-btn {
   border: 0; border-radius: 10px; padding: 6px 14px; min-height: 36px; cursor: pointer;
-  background: var(--accent); color: #fff; font-weight: 600; font-size: 14px; text-decoration: none;
+  background: var(--accent); color: var(--on-accent); font-weight: 600; font-size: 14px; text-decoration: none;
   display: inline-flex; align-items: center;
 }
 .thumb { width: 40px; height: 40px; object-fit: cover; border-radius: 8px; }
@@ -301,23 +305,33 @@ main {
 .qr-code-line { margin: 14px 0 4px; font-size: 15px; }
 .qr-link { margin: 0 0 16px; font-size: 13px; color: var(--muted); word-break: break-all; user-select: all; }
 
-/* In a room: a teal palette for the whole page, so it is clear the page is in a room. */
-.in-room main, .in-room .qr-dialog {
-  --surface: #f1fbf9;
-  --bg: #e4f4f1;
-  --line: #c9e7e1;
-  --accent: #0f8f84;
-  --accent-strong: #0b6f67;
-  --accent-soft: #d4f1ec;
+/* Each "who can see me" tab has its own palette for the whole page, so it is clear where you are:
+   public on the LAN = peach (the defaults above), plaza = violet, room = teal, offline = slate.
+   Every text colour keeps at least 4.5:1 against its background (WCAG AA), light and dark. */
+body[data-mode="plaza"] {
+  --text: #25213a; --muted: #655f80; --bg: #f1eefc; --surface: #fbfaff; --line: #ddd5f7;
+  --accent: #6347d1; --accent-strong: #5236b8; --accent-soft: #e6e0fb; --on-accent: #ffffff;
+}
+body[data-mode="room"] {
+  --text: #1d2b29; --muted: #556b67; --bg: #e4f4f1; --surface: #f6fcfb; --line: #c9e7e1;
+  --accent: #0d7a70; --accent-strong: #0a655d; --accent-soft: #d4f1ec; --on-accent: #ffffff;
+}
+body[data-mode="offline"] {
+  --text: #262a31; --muted: #5d6573; --bg: #eceef2; --surface: #f8f9fb; --line: #d9dde4;
+  --accent: #525c6c; --accent-strong: #434c5a; --accent-soft: #e1e5eb; --on-accent: #ffffff;
 }
 @media (prefers-color-scheme: dark) {
-  .in-room main, .in-room .qr-dialog {
-    --surface: #182625;
-    --bg: #101b1a;
-    --line: #2a4744;
-    --accent: #3fc2b4;
-    --accent-strong: #6adacd;
-    --accent-soft: #1d3b38;
+  body[data-mode="plaza"] {
+    --text: #ece9f8; --muted: #aaa3c8; --bg: #16131f; --surface: #211c30; --line: #3a3155;
+    --accent: #a48cff; --accent-strong: #bcaaff; --accent-soft: #2e2550; --on-accent: #1a1033;
+  }
+  body[data-mode="room"] {
+    --text: #e3f3f0; --muted: #98b8b2; --bg: #101b1a; --surface: #182625; --line: #2a4744;
+    --accent: #3fc2b4; --accent-strong: #6adacd; --accent-soft: #1d3b38; --on-accent: #06201d;
+  }
+  body[data-mode="offline"] {
+    --text: #e6e8ec; --muted: #a3aab6; --bg: #15171b; --surface: #1f2228; --line: #343943;
+    --accent: #9aa4b4; --accent-strong: #b8c0cc; --accent-soft: #2b3038; --on-accent: #14171c;
   }
 }
 
