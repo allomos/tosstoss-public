@@ -114,7 +114,7 @@
       onMessage(msg);
     };
     ws.onclose = () => {
-      if (state.ws !== ws) return;
+      if (state.ws !== ws || state.paused) return;
       dropConnection();
       if (state.wantOnline) {
         setStatus('connecting');
@@ -150,6 +150,13 @@
 
   function onMessage(msg) {
     switch (msg.type) {
+      case 'paused':
+        // The service is paused: cover the page and stop reconnecting (a reload checks again).
+        state.paused = true;
+        state.wantOnline = false;
+        document.getElementById('pausedPage').hidden = false;
+        document.body.classList.add('is-paused');
+        break;
       case 'welcome':
         state.myId = msg.id;
         // Opened via localhost? Show the LAN address others should open instead.
@@ -239,7 +246,7 @@
 
   // Phones drop the connection while the page is in the background; reconnect on return.
   document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState !== 'visible' || !state.wantOnline) return;
+    if (document.visibilityState !== 'visible' || !state.wantOnline || state.paused) return;
     if (!state.ws || state.ws.readyState > WebSocket.OPEN) { state.ws = null; connect(); }
   });
 

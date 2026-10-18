@@ -65,6 +65,7 @@
       'err.offerExpired': '已过期，对方没有等到你接收', 'err.declinedByMe': '已拒绝',
       'err.rate': '发得太频繁：广场里每分钟最多 {n} 个文件',
       'toast.offer': '{peer} 想发给你 {file}，在传输记录里点“接收”',
+      'paused.title': '投桃暂停服务', 'paused.body': '服务暂时停止，请稍后再来。',
     },
     en: {
       brand: 'Tosstoss',
@@ -126,6 +127,7 @@
       'err.offerExpired': 'Expired before you accepted', 'err.declinedByMe': 'Declined',
       'err.rate': 'Too many files: the plaza allows {n} per minute',
       'toast.offer': '{peer} wants to send you {file}. Tap "Accept" under Transfers',
+      'paused.title': 'Tosstoss is paused', 'paused.body': 'The service is paused for now. Please come back later.',
     },
     ja: {
       brand: '投桃',
@@ -187,6 +189,7 @@
       'err.offerExpired': '受け取る前に期限切れになりました', 'err.declinedByMe': '断りました',
       'err.rate': '送信が多すぎます：広場では 1 分に {n} ファイルまでです',
       'toast.offer': '{peer} が {file} を送りたいそうです。転送履歴で「受け取る」を押してください',
+      'paused.title': '投桃は一時停止中です', 'paused.body': 'サービスを一時停止しています。しばらくしてからまたお越しください。',
     },
     es: {
       brand: 'Tosstoss',
@@ -248,6 +251,7 @@
       'err.offerExpired': 'Caducó antes de que lo aceptaras', 'err.declinedByMe': 'Rechazado',
       'err.rate': 'Demasiados archivos: la plaza permite {n} por minuto',
       'toast.offer': '{peer} quiere enviarte {file}. Toca "Aceptar" en Transferencias',
+      'paused.title': 'Tosstoss está en pausa', 'paused.body': 'El servicio está en pausa por ahora. Vuelve más tarde.',
     },
   };
 

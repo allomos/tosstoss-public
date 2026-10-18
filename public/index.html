@@ -93,6 +93,13 @@
   <div id="dragOverlay" class="overlay" hidden><div data-i18n="overlay"></div></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
+  <!-- The server is paused (PAUSED in wrangler.jsonc): this covers the whole page. -->
+  <div id="pausedPage" class="paused-page" hidden>
+    <img src="icon.svg" alt="" width="72" height="72">
+    <h1 data-i18n="paused.title"></h1>
+    <p data-i18n="paused.body"></p>
+  </div>
+
   <dialog id="qrDialog" class="qr-dialog" aria-labelledby="qrTitle">
     <h2 id="qrTitle" data-i18n="room.qrTitle"></h2>
     <div id="qrBox" class="qr-box"></div>

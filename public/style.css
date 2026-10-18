@@ -322,3 +322,14 @@ main {
 @media (prefers-color-scheme: dark) {
   .btn.renew { --renew: #ff8a7a; --renew-soft: #3a1d1a; }
 }
+
+/* 投桃暂停服务: the server is paused, the page is covered. */
+.paused-page {
+  position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px; padding: 24px 16px;
+  background: var(--bg); color: var(--text); text-align: center;
+}
+.paused-page[hidden] { display: none; }
+.paused-page h1 { margin: 12px 0 0; font-size: 26px; }
+.paused-page p { margin: 0; color: var(--muted); max-width: 26em; }
+body.is-paused { overflow: hidden; }

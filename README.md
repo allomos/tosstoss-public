@@ -56,6 +56,14 @@ node scripts/unlimited.js new-name > .unlimited-name
 - **房间**：选“房间”就回到上次的房间（没有就新建一个），下面显示房间码、复制链接、显示二维码、加入其他房间、重建房间（换一个新房间码，旧房间里的设备不再看到你）。打开链接或输入房间码的设备在同一房间里互相可见，不论在哪个网络（手机流量也行）；打开房间链接会直接进入“房间”。切到别的选项就离开房间。
 - 文件经 Cloudflare 中转，不落盘。
 
+### 暂停服务
+
+防止 Cloudflare 费用失控用的手动开关。打开后，所有打开投桃的页面整页显示“投桃暂停服务”，不再重连；服务器在入口直接回答，不叫醒任何 Durable Object，所以暂停期间几乎不产生费用。局域网版（`npm start`）没有这个开关。
+
+- **暂停**：把 `wrangler.jsonc` 里的 `"PAUSED"` 改成 `"1"`，再部署：`npm run deploy`（公开版）、`npm run deploy:unlimited`（不限大小版）。两个版本各有一份 `vars`，要暂停哪个就改哪个；几秒后生效，已打开的页面也会在下次连接时变成暂停页。
+- **恢复**：改回 `"0"`，再部署一次。用户刷新页面即可。
+- **手边没有电脑**：在 Cloudflare 后台 Workers & Pages → 对应的 Worker → Settings → Variables 里把 `PAUSED` 改成 `1`，保存后立即生效。但下次从电脑部署时会被 `wrangler.jsonc` 里的值覆盖回去，事后记得把文件也改成一致。
+
 本地试公网版：`npm run dev:cf`（20 MB 限制）或 `npm run dev:cf:unlimited`（http://127.0.0.1:8787），再用 `npm run test:cf` 对它跑全部测试。
 
 ## 语言

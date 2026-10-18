@@ -21,6 +21,9 @@ export default {
     const url = new URL(request.url);
     if (url.pathname !== '/ws') return env.ASSETS.fetch(request);
     if (request.headers.get('Upgrade') !== 'websocket') return new Response('Expected WebSocket', { status: 426 });
+    // PAUSED "1" (wrangler.jsonc, or the dashboard's variables): every page shows 投桃暂停服务.
+    // Answered here, so no Durable Object wakes up and the pause costs next to nothing.
+    if (env.PAUSED === '1') return paused();
     const room = (url.searchParams.get('room') || '').toUpperCase();
     const headers = { ...Object.fromEntries(request.headers), 'X-Tosstoss-Room': ROOM_RE.test(room) ? room : '' };
     if (!ROOM_RE.test(room) && url.searchParams.get('plaza') === '1') {
@@ -37,6 +40,15 @@ export default {
     return hub.fetch(request, { headers });
   },
 };
+
+// A socket that only says "paused" and closes; the page then stops reconnecting.
+function paused() {
+  const pair = new WebSocketPair();
+  pair[1].accept();
+  pair[1].send(JSON.stringify({ type: 'paused' }));
+  pair[1].close(4003, 'paused');
+  return new Response(null, { status: 101, webSocket: pair[0] });
+}
 
 // Devices on one network share an IPv4 address, but each gets its own IPv6 address
 // inside the network's /64, so group IPv6 by its first four blocks.
