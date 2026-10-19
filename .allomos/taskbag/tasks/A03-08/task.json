@@ -5,6 +5,6 @@
   "label": "locally verified",
   "state": "waiting",
   "title": "四个标签共用一个护眼的页面大背景色，只用卡片和强调色区分标签",
-  "waiting_on": "选设计方案：A 米白纸色 #F4F1EA / #1A1916，或 B 雾灰绿 #EEF1EC / #171A18（设计图已发给使用者）",
+  "waiting_on": "已正式发布两个公网版本（2026-10-19，方案 A 米白纸色）。请在 https://tosstoss.mypals.workers.dev 切换四个标签，确认大背景一致、看着舒服；手机和深色模式各看一次",
   "who": "使用者"
 }
