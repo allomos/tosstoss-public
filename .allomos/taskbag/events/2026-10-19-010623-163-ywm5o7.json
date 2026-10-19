@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-19T01:06:23Z",
+  "by": "claude-plaza",
+  "via": "alm",
+  "command": "wait",
+  "kind": "task",
+  "id": "A03-08",
+  "changes": [
+    {
+      "field": "state",
+      "from": "in_progress",
+      "to": "waiting"
+    },
+    {
+      "field": "waiting_on",
+      "to": "选设计方案：A 米白纸色 #F4F1EA / #1A1916，或 B 雾灰绿 #EEF1EC / #171A18（设计图已发给使用者）"
+    },
+    {
+      "field": "who",
+      "to": "使用者"
+    }
+  ]
+}
