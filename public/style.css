@@ -1,5 +1,5 @@
 :root {
-  --bg: #fdf6f2;
+  --bg: #f4f1ea; /* the page background: one warm paper white for every tab */
   --surface: #ffffff;
   --text: #2d2320;
   --muted: #76645e;
@@ -18,7 +18,7 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1b1614;
+    --bg: #1a1916;
     --surface: #262019;
     --text: #f3e9e5;
     --muted: #b4a39c;
@@ -307,30 +307,31 @@ main {
 
 /* Each "who can see me" tab has its own palette for the whole page, so it is clear where you are:
    public on the LAN = peach (the defaults above), plaza = violet, room = teal, offline = slate.
+   The page background (--bg) stays the same warm paper colour on every tab; cards and accents change.
    Every text colour keeps at least 4.5:1 against its background (WCAG AA), light and dark. */
 body[data-mode="plaza"] {
-  --text: #25213a; --muted: #655f80; --bg: #f1eefc; --surface: #fbfaff; --line: #ddd5f7;
+  --text: #25213a; --muted: #655f80; --surface: #fbfaff; --line: #ddd5f7;
   --accent: #6347d1; --accent-strong: #5236b8; --accent-soft: #e6e0fb; --on-accent: #ffffff;
 }
 body[data-mode="room"] {
-  --text: #1d2b29; --muted: #556b67; --bg: #e4f4f1; --surface: #f6fcfb; --line: #c9e7e1;
+  --text: #1d2b29; --muted: #556b67; --surface: #f6fcfb; --line: #c9e7e1;
   --accent: #0d7a70; --accent-strong: #0a655d; --accent-soft: #d4f1ec; --on-accent: #ffffff;
 }
 body[data-mode="offline"] {
-  --text: #262a31; --muted: #5d6573; --bg: #eceef2; --surface: #f8f9fb; --line: #d9dde4;
+  --text: #262a31; --muted: #5d6573; --surface: #f8f9fb; --line: #d9dde4;
   --accent: #525c6c; --accent-strong: #434c5a; --accent-soft: #e1e5eb; --on-accent: #ffffff;
 }
 @media (prefers-color-scheme: dark) {
   body[data-mode="plaza"] {
-    --text: #ece9f8; --muted: #aaa3c8; --bg: #16131f; --surface: #211c30; --line: #3a3155;
+    --text: #ece9f8; --muted: #aaa3c8; --surface: #211c30; --line: #3a3155;
     --accent: #a48cff; --accent-strong: #bcaaff; --accent-soft: #2e2550; --on-accent: #1a1033;
   }
   body[data-mode="room"] {
-    --text: #e3f3f0; --muted: #98b8b2; --bg: #101b1a; --surface: #182625; --line: #2a4744;
+    --text: #e3f3f0; --muted: #98b8b2; --surface: #182625; --line: #2a4744;
     --accent: #3fc2b4; --accent-strong: #6adacd; --accent-soft: #1d3b38; --on-accent: #06201d;
   }
   body[data-mode="offline"] {
-    --text: #e6e8ec; --muted: #a3aab6; --bg: #15171b; --surface: #1f2228; --line: #343943;
+    --text: #e6e8ec; --muted: #a3aab6; --surface: #1f2228; --line: #343943;
     --accent: #9aa4b4; --accent-strong: #b8c0cc; --accent-soft: #2b3038; --on-accent: #14171c;
   }
 }
